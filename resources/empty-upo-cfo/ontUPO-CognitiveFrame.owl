@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.iimm.ru/ont-library/Congnitive-frame.owl#"
+     xml:base="http://www.iimm.ru/ont-library/Congnitive-frame.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasBranch -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasBranch">
+        <rdfs:label xml:lang="ru">Имеет дугу</rdfs:label>
+        <rdfs:comment xml:lang="ru">Связывает содержание к-фрейма с дугой.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch"/>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-content"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasCFrameComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasCFrameComponent">
+        <rdfs:label xml:lang="ru">Включает компонент фрейма</rdfs:label>
+        <rdfs:comment xml:lang="ru">Связывает когнтивный фрейм с его компонентами.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-content"/>
+                    <rdf:Description rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Visualization-way"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasContent -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasContent">
+        <rdfs:subPropertyOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasCFrameComponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasObjectConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasObjectConcept">
+        <rdfs:label xml:lang="ru">Имеет объект</rdfs:label>
+        <rdfs:comment xml:lang="ru">Связывает дугу, представляющую отношение (объектное свойство) между двумя концептами, и концепт-объект (значение свойства).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasSubjectConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasSubjectConcept">
+        <rdfs:label xml:lang="ru">Имеет субъект</rdfs:label>
+        <rdfs:comment xml:lang="ru">Связывает дугу, представляющую отношение (объектное свойство) между двумя концептами, и концепт-субъект (носитель свойства).</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasTargetConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasTargetConcept">
+        <rdfs:label xml:lang="ru">Имеет целевой концепт.</rdfs:label>
+        <rdfs:comment xml:lang="ru">Определяе целевой концеп когнитивного фрейма, то есть тот, о котором фрейм передает информацию.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasVisualizationWay -->
+
+    <owl:ObjectProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasVisualizationWay">
+        <rdfs:subPropertyOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasCFrameComponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasBranchProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#hasBranchProperty">
+        <rdfs:label xml:lang="ru">Отношение дуги</rdfs:label>
+        <rdfs:comment xml:lang="ru">Указывает на IRI объектного свойства, представляемого данной дугой.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Branch">
+        <rdfs:label xml:lang="ru">Дуга</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-component"/>
+        <rdfs:comment xml:lang="ru">Дуга (ребро, отношение), представляюще связь двух понятий в к-фрейме определенным отношением.
+Дуга связывается с понятием-субъектом отншения и понятием-объектом, а также с IRI отношения, которое оно представляет.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-component -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-component"/>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-content -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-content">
+        <rdfs:label xml:lang="ru">Содержание фрейма</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-component"/>
+        <rdfs:comment xml:lang="ru">Содержание состоит из понятий и дуг (отношений), между понятиями.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame">
+        <rdfs:label xml:lang="ru"> Когнитивный фрейм</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Dependency-CFrame -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Dependency-CFrame">
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Partonomy-CFrame -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Partonomy-CFrame">
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Special-CFrame -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Special-CFrame">
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Taxnonomy-CFrame -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Taxnonomy-CFrame">
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Visualization-way -->
+
+    <owl:Class rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Visualization-way">
+        <rdfs:label xml:lang="ru"> Способ визуализации</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-component"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.iimm.ru/ont-library/Congnitive-frame.owl#Node-link-diagramm-visualisation -->
+
+    <owl:NamedIndividual rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Node-link-diagramm-visualisation">
+        <rdf:type rdf:resource="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Visualization-way"/>
+        <rdfs:label xml:lang="ru">Визуализация в виде графовой структуры</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#CFrame-content"/>
+            <rdf:Description rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Cognitive-frame"/>
+            <rdf:Description rdf:about="http://www.iimm.ru/ont-library/Congnitive-frame.owl#Visualization-way"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
