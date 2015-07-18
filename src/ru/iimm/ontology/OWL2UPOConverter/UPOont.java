@@ -42,7 +42,7 @@ public class UPOont extends UserPresenOnt
     {
         if (instance == null)
         {
-            LOGGER.error("!ERROR! Run OWLont first!");	    	    
+            LOGGER.error("!ERROR! Run init() first!");	    	    
         }
         return instance;
     }

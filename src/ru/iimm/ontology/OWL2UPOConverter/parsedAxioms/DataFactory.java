@@ -399,7 +399,6 @@ public class DataFactory
 
 		for (OWLClass cls : clsList)
 		{
-
 			prp = defineClassRelationType(cls, exp, ontOWL);
 
 			turple = new ArrayList<IRI>();
@@ -407,7 +406,6 @@ public class DataFactory
 			turple.add(cls.getIRI());
 
 			resList.add(turple);
-			// LOGGER.info(" ==Subax exp:" + this.subAxOWL);
 			LOGGER.info(" Bind internal class <" + cls.getIRI().getFragment()
 					+ "> " + "by relation <" + prp.getIRI().getFragment() + ">");
 		}
