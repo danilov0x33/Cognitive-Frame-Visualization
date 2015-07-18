@@ -34,12 +34,13 @@ import ru.iimm.ontology.ontAPI.SkosOnt;
  */
 public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 {
-	/*
+	/**
 	 * Набор использованных имен sparql переменных. Нужен для того, чтобы
 	 * избежать повторений при генерации новых имен при добавлении концептов в
 	 * ОПП.
 	 */
-	private HashSet<String> usedSparqlVarNames;
+	//private HashSet<String> usedSparqlVarNames;
+	private HashSet<StringBuffer> usedSparqlVarNames;
 
 	/**
 	 * Счетчик сложных субаксиом. Используется при генерации IRI их концептов.
@@ -60,7 +61,7 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 		super(skosIRI, filePath);
 		// TODO в будущем надо загружать в список названия переменных из
 		// существующей ОПП
-		this.usedSparqlVarNames = new HashSet<String>();
+		this.usedSparqlVarNames = new HashSet<StringBuffer>();
 
 		/* Добавляем в пустую ОПП аналог класса Thing */
 		this.addConceptToUPO(ConstantsOntConverter.OWL_THING,
@@ -82,7 +83,7 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 		super(dir, fileName, mergeImportedOntology, false);
 		// TODO в будущем надо загружать в список названия переменных из
 		// существующей ОПП
-		this.usedSparqlVarNames = new HashSet<String>();
+		this.usedSparqlVarNames = new HashSet<StringBuffer>();
 
 		/* Добавляем в пустую ОПП аналог класса Thing */
 		this.addConceptToUPO(ConstantsOntConverter.OWL_THING,
@@ -116,7 +117,7 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 		UPO = new UserPresenOnt(dir, file, false);
 		// TODO в будущем надо загружать в список названия переменных из
 		// существующей ОПП
-		UPO.usedSparqlVarNames = new HashSet<String>();
+		UPO.usedSparqlVarNames = new HashSet<StringBuffer>();
 
 		return UPO;
 	}
@@ -257,7 +258,8 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 				OWL2Datatype.XSD_STRING);
 
 		// Добавляем использованну SPARQL перемнную в набор ОПП
-		this.usedSparqlVarNames.add(varSparql);
+		// это делается при ее генерации в genNewSparql...()
+		//this.usedSparqlVarNames.add(varSparql);
 
 		this.addAnnotation(RDF_LABEL, labelLiteral, (OWLEntity) newConcept);
 		this.addAnnotation(SKOS_HIDDEN_LABEL, hiddenLabelLiteral,
@@ -430,7 +432,8 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 		String varSparql = "?" + getShortIRI(propertyIRI);
 
 		// Добавляем использованну SPARQL перемнную в набор ОПП
-		this.usedSparqlVarNames.add(varSparql);
+		// Делается при генерации 
+		//this.usedSparqlVarNames.add(varSparql);
 
 		/* Создаем соответвующий видимый Label - короткий IRI */
 		String label = getShortIRI(rangeIRI);
@@ -593,13 +596,20 @@ public class UserPresenOnt extends SkosOnt implements ConstantsOntConverter
 	{
 		
 		int index=0;
-		String newVar="?"+sbAx.getTitle();
+		StringBuffer newVar= new StringBuffer().append('?'+sbAx.getTitle());
+		//String newVar="?"+sbAx.getTitle();
 		if (this.usedSparqlVarNames.contains(newVar))
 		{
+			newVar.append('-'+index++);			
 			while ( this.usedSparqlVarNames.contains(newVar) )
-				newVar ="?"+sbAx.getTitle()+"-"+index++; 
+			{
+				//newVar = "?"+sbAx.getTitle()+"-"+index++;
+				newVar.delete(newVar.lastIndexOf("-"), newVar.length());
+				newVar.append('-'+index++);			
+ 			}
+				 
 		}
-		return newVar;
+		return newVar.toString();
 	}
 
 }
