@@ -1,7 +1,6 @@
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -14,18 +13,16 @@ import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLEntity;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLProperty;
-import org.semanticweb.owlapi.model.OWLPropertyExpression;
 import org.semanticweb.owlapi.model.OWLQuantifiedRestriction;
 import org.semanticweb.owlapi.model.OWLRestriction;
-import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
-import org.semanticweb.owlapi.util.SimpleIRIShortFormProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.iimm.ontology.ontAPI.Ontology;
-import scala.collection.parallel.ParIterableLike.Foreach;
+import ru.iimm.ontology.OWL2UPOConverter.ConstantsOntConverter;
+import ru.iimm.ontology.OWL2UPOConverter.OWLont;
+import ru.iimm.ontology.OWL2UPOConverter.PairOfIRI;
+import ru.iimm.ontology.OWL2UPOConverter.UPOont;
+import ru.iimm.ontology.OWL2UPOConverter.UserPresenOnt;
 
 /**
  * Сложная субаксиомы - коньюнкция выражений или выражение, не 
@@ -306,7 +303,7 @@ public String getSparqlVar(SubAxiom subaxFromAnotherPart)
 
 public String getSparqlVar()
 {
-	return genNewSparqlVar(this, UPOont.getUPOont());
+	return UPOont.getUPOont().genNewSparqlVar(this);
 }
 
 public ArrayList<PairOfIRI> getObjPrpList()
@@ -324,24 +321,6 @@ public ArrayList<PrpIRIandSubAxiom> getPrpFromAxList()
 	return prpFromAxList;
 }
 
-/**
- * Генерит новую SPARQL переменную, которой еще нет в UPO.
- * @param sbAx субаксиома, для которой надо сгенерить переменную
- * @param ontUPO
- * @return
- */
-private String genNewSparqlVar(SubAxiom sbAx,UserPresenOnt ontUPO)
-{
-	
-	int index=0;
-	String newVar="?"+sbAx.getTitle();
-	if (ontUPO.usedSparqlVarNames.contains(newVar))
-	{
-		while ( ontUPO.usedSparqlVarNames.contains(newVar) )
-			newVar ="?"+sbAx.getTitle()+"-"+index++; 
-	}
-	return newVar;
-}
 
 
 
@@ -525,16 +504,16 @@ private void bindingConceptOfComplexSubAxiomWithOther(OWLNamedIndividual sbAxInd
 	for (Iterator<PairOfIRI> it = this.getIteratorOfDataPropertyList(); it.hasNext();)
 	{
 		PairOfIRI pair = (PairOfIRI) it.next();
-		LOGGER.info("   DtpPrp:"+ pair.fIRI + " Val:" + pair.sIRI);
+		LOGGER.info("   DtpPrp:"+ pair.getFirst() + " Val:" + pair.getFirst());
 		/*
 		 * Добавляем новый концеп-радиус т.к. старый (если существует)
 		 * связан с другим СКОС концептом, а договорились что у радиусов
 		 * будем генерить новый
 		 */
 		OWLNamedIndividual newRange =
-				upo.addDatatypeRangeToUPO(pair.sIRI, pair.fIRI);
+				upo.addDatatypeRangeToUPO(pair.getFirst(), pair.getFirst());
 		upo.makeObjPrpOBetweenElements(sbAxInd.getIRI(), 
-				pair.fIRI, newRange.getIRI(), false);
+				pair.getFirst(), newRange.getIRI(), false);
 	}
 
 	/* * Привязывем к субаксиоме ее именованные классы */
@@ -576,7 +555,7 @@ private void bindingConceptOfComplexSubAxiomWithOther(OWLNamedIndividual sbAxInd
 	    for (PairOfIRI pairOfIRI : propDomainPairList)
 	    {
 		//fragment = fragment + pairOfIRI.fIRI.getFragment() +"{"+pairOfIRI.sIRI.getFragment()+"}"   + ConstantsOntConverter.UPO_TITLE_DELIMITER;
-		fragment = fragment + pairOfIRI.fIRI.getFragment() + UPOont.getFBrackedString(pairOfIRI.sIRI.getFragment()) 
+		fragment = fragment + pairOfIRI.getFirst().getFragment() + UPOont.getFBrackedString(pairOfIRI.getFirst().getFragment()) 
 		+ ConstantsOntConverter.UPO_TITLE_DELIMITER;
 	    }
 	    return fragment;

@@ -1,5 +1,7 @@
 == 1.0 ver. Cognitive Frame Visualizer =====
 - add CFs creating based on basic ontology relation (taxonomy, partonomy, dependence)
 - final CF images produce by Cajun, Prefuse, GraphStream frameworks
+== 1.1 ver. Cognitive Frame Visualizer =====
+- refactoring cftools
 
 

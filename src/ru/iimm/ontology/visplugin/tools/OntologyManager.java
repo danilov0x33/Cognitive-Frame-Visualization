@@ -12,9 +12,9 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.iimm.ontology.OWL2UPOConverter.DataFactory;
 import ru.iimm.ontology.OWL2UPOConverter.OWLont;
 import ru.iimm.ontology.OWL2UPOConverter.UPOont;
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.DataFactory;
 import ru.iimm.ontology.cftools.CFrameOnt;
 import ru.iimm.ontology.cftools.UPOCFrameFormer;
 

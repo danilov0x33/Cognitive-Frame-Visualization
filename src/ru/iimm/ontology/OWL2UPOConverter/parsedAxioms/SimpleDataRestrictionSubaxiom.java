@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -12,6 +12,8 @@ import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDatatype;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLProperty;
+
+import ru.iimm.ontology.OWL2UPOConverter.UserPresenOnt;
 
 /**
  * Субаксиома включающая простое ограничение на типизированное свойство

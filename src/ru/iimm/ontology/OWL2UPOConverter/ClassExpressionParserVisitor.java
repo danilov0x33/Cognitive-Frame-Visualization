@@ -33,6 +33,7 @@ import org.semanticweb.owlapi.model.OWLRestriction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.SubAxiom;
 import ru.iimm.ontology.ontAPI.Ontology;
 
 /**
@@ -94,7 +95,7 @@ public class ClassExpressionParserVisitor implements OWLClassExpressionVisitor
     /**
      * @param ont
      */
-    protected ClassExpressionParserVisitor()
+    public ClassExpressionParserVisitor()
     {
 	super();
 	this.sbAxCreator = new SubAxiomCreatorVisitor();

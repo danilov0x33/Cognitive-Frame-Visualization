@@ -31,6 +31,9 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.PrpIRIandSubAxiom;
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.SubAxiom;
+
 /**
  * Визитор, собирающей из выражения, которое будет далее 
  * субаксиомой, ограничения на свойства + субаксиомы из радиусов этих свойств.
@@ -74,7 +77,7 @@ public class ElementCollectorVisitor implements OWLClassExpressionVisitor
     /**
      * 
      */
-    ElementCollectorVisitor()
+    public ElementCollectorVisitor()
     {
 	super();
 	this.datypePropList = new ArrayList<PairOfIRI>();

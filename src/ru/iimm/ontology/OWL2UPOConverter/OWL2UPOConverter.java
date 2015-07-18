@@ -18,6 +18,9 @@ import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.DataFactory;
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.ParsedAxiom;
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.SplitAxiom;
 import ru.iimm.ontology.ontAPI.ConstantsOntAPI;
 import ru.iimm.ontology.ontAPI.Ontology;
 
@@ -60,7 +63,7 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 	
 	//int findingComplexSubaxiomCounter=0;
 	
-	OWL2UPOConverter(Ontology ont, UserPresenOnt ontUPO)
+	public OWL2UPOConverter(Ontology ont, UserPresenOnt ontUPO)
 	{
 		this.ontOWL = ont;
 		this.ontUPO = ontUPO;
@@ -434,11 +437,11 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 		for (SplitAxiom axM : axList)
 		{
 		    /*.. берем класс из левой части аксиомы ахМ - класс М*/		  
-		    if (axM.leftOWLclassExpression.isAnonymous()) continue;		
-		    else axMleftClass = axM.leftOWLclassExpression.asOWLClass();
+		    if (axM.getLeftOWLclassExpression().isAnonymous()) continue;		
+		    else axMleftClass = axM.getLeftOWLclassExpression().asOWLClass();
 			
 		    LOGGER.info(" --- Checking inheritance from: "+axMleftClass.getIRI().getFragment());
-		    LOGGER.info(" Inheritable ax: "+axM.rightOWLclassExpression);
+		    LOGGER.info(" Inheritable ax: "+axM.getRightOWLclassExpression());
 		    
 		    /*Для М находим все именованные подклассы - возможные наследники аксиомы AxM*/
 		    Set<OWLClass> successorSet = ontOWL.getNamedSubclassesOfNamedClass(axMleftClass, false);
@@ -451,8 +454,8 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 			/*.. для каждой аксиомы, описывающей этого наследника */
 			isInherited = true;
 			for (SplitAxiom succAx : this.getAxiomsRelevantToClass(possibleSuc, axList))
-			{/*==.. проверяем подразумевает ли она (succAx) аксиому AxM*/
-			    if (isEntailedAxiomFrom(succAx.rightOWLclassExpression, /* ==> */ axM.rightOWLclassExpression))
+			{/*==.. проверяем подразумевает ли она (succAx) аксиому AxM:: succAx ==> axM */
+			    if (isEntailedAxiomFrom(succAx.getRightOWLclassExpression(), axM.getRightOWLclassExpression()))
 			    {
 				isInherited = false;
 				break;
@@ -487,8 +490,8 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 	    
 	    for (SplitAxiom ax : relevantAxList)
 	    {
-		if (!ax.leftOWLclassExpression.isAnonymous() && 
-			ax.leftOWLclassExpression.asOWLClass().equals(cls) )
+		if (!ax.getLeftOWLclassExpression().isAnonymous() && 
+			ax.getLeftOWLclassExpression().asOWLClass().equals(cls) )
 		{
 		    relevantAxList.add(ax);
 		} 
@@ -524,7 +527,7 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 		SplitAxiom newAx = (SplitAxiom) DataFactory.getFactory().getCloneAxiom(ax);
 		//SimpleSubAxiom successorSubAx = this.dataFactory.getSimpleSubAxiom(successorClass.getIRI(), this.ontUPO);
 		//SimpleSubAxiom successorSubAx = this.dataFactory.getSimpleSubAxiom(successorClass, this.ontOWL, this.ontUPO);
-		newAx.leftOWLclassExpression = successorClass;	
+		newAx.setLeftOWLclassExpression(successorClass);	
 		return newAx;
 	}
 
@@ -546,8 +549,8 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 	    {
 		/*.. выбираем описываемых ею класс и находим/создаем набор набор аксиом
 		 * для этого класса в карте*/
-		cls = splitAxiom.leftOWLclassExpression.isAnonymous() ? 
-			null : splitAxiom.leftOWLclassExpression.asOWLClass();		
+		cls = splitAxiom.getLeftOWLclassExpression().isAnonymous() ? 
+			null : splitAxiom.getLeftOWLclassExpression().asOWLClass();		
 		classAxiomList = axMap.containsKey(cls) ?  axMap.get(cls): new ArrayList<SplitAxiom>();
 		
 		/*.. добавляем аксиому в набор, а сам набор в карту */
@@ -555,7 +558,7 @@ public class OWL2UPOConverter implements ConstantsOntAPI, ConstantsOntConverter
 		{
 		    classAxiomList.add(splitAxiom);
 		    axMap.put(cls, classAxiomList);
-		    LOGGER.info(" Class:"+cls.getIRI().getFragment()+" ==> "+splitAxiom.rightOWLclassExpression);
+		    LOGGER.info(" Class:"+cls.getIRI().getFragment()+" ==> "+splitAxiom.getRightOWLclassExpression());
 		}
 	    }
 	    LOGGER.info("------Class quality"+axMap.size());

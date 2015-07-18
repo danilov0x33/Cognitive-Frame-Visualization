@@ -1,4 +1,4 @@
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,8 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ru.iimm.ontology.OWL2UPOConverter.UserPresenOnt;
 
 
 

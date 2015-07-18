@@ -7,12 +7,36 @@ import org.semanticweb.owlapi.model.IRI;
 	 */
 public class PairOfIRI
 	{
-		IRI fIRI;
-		IRI sIRI;
+		private IRI fIRI;
+		private IRI sIRI;
 		
 		public PairOfIRI(IRI fIRI, IRI sIRI)
 		{
-			this.fIRI=fIRI;
-			this.sIRI=sIRI;
+			this.setSecond(fIRI);
+			this.setSecond(sIRI);
+		}
+
+		/**
+		 * @return the fIRI
+		 */
+		public IRI getFirst()
+		{
+			return fIRI;
+		}
+
+		/**
+		 * @param fIRI the fIRI to set
+		 */
+		public void setFirst(IRI fIRI)
+		{
+			this.fIRI = fIRI;
+		}
+
+		/**
+		 * @param sIRI the sIRI to set
+		 */
+		public void setSecond(IRI sIRI)
+		{
+			this.sIRI = sIRI;
 		}
 	}

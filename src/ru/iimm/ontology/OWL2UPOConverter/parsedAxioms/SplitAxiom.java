@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 
 import java.util.ArrayList;
 
