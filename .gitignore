@@ -1,0 +1,10 @@
+/*
+!pom.xml
+!build.xml
+!viewconfig-mainTab.xml
+!plugin.xml
+!/src
+!/log
+!/META-INF
+!*.md
+!.gitignore

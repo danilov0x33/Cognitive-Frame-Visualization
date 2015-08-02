@@ -10,10 +10,8 @@ import prefuse.controls.ZoomControl;
 import prefuse.data.Graph;
 import prefuse.util.ColorLib;
 import prefuse.visual.VisualItem;
-import profusians.zonemanager.util.display.ZoneBorderDrawing;
 import ru.iimm.ontology.visplugin.tools.prefuse.render.HighlightFartherNodeControl;
 import ru.iimm.ontology.visplugin.tools.prefuse.render.DefaultVisualizationPrefuse;
-import ru.iimm.ontology.visplugin.tools.prefuse.render.patterns.PatternVisualizationPrefuse;
 import ru.iimm.ontology.visplugin.tools.prefuse.tools.ConstantsPrefuse;
 
 /**
@@ -35,24 +33,6 @@ public class DisplayPrefuse extends Display
 		
 		this.init();
 	}
-	
-	public DisplayPrefuse(PatternVisualizationPrefuse vis, Graph graph)
-	{		
-		super(vis);
-		
-		this.init();
-		
-		this.graph = graph;
-		
-		//Отображает зоны
-		this.addPaintListener(new ZoneBorderDrawing(vis.getZoneManager()));
-		
-		ColorAction aFill = vis.getZoneManager().getZoneColorAction();
-		vis.getDraw().add(aFill);
-		
-		vis.putAction(ConstantsPrefuse.COLOR, vis.getDraw());
-	}
-	
 
 	private void init()
 	{		
