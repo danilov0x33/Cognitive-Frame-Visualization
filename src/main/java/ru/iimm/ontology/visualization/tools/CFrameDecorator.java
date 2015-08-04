@@ -1,7 +1,5 @@
 package ru.iimm.ontology.visualization.tools;
 
-import java.util.ArrayList;
-
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import ru.iimm.ontology.cftools.CFrameOnt;
 import ru.iimm.ontology.cftools.CFrameVisitor;
 import ru.iimm.ontology.cftools.CFrameVisualisationMethod;
 import ru.iimm.ontology.cftools.DependencyCFrame;
-import ru.iimm.ontology.cftools.NodeLinkVisualizationMethod;
 import ru.iimm.ontology.cftools.PartonomyCFrame;
 import ru.iimm.ontology.cftools.SpecialCFrame;
 import ru.iimm.ontology.cftools.TaxonomyCFrame;
@@ -27,9 +24,7 @@ import ru.iimm.ontology.visualization.lang.Language;
 public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualizationViewerInt
 {
 	private static final Logger log = LoggerFactory.getLogger(CFrameDecorator.class);
-	
-	/**Список визуализиций для CFrame.*/
-	private ArrayList<VisualMethodVisitorInt> visualMethodList;
+
 	/**CFrame для которой создаем оболочку.*/
 	private CFrame cframe;
 	/**Онтология с CFrame.*/
@@ -47,89 +42,35 @@ public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualization
 	public CFrameDecorator(CFrameOnt cfOnt,CFrame cframe)
 	{
 		this.cfOnt = cfOnt;
-		this.visualMethodList = new ArrayList<VisualMethodVisitorInt>();
 		this.setCframe(cframe);
-	}
-	
-	private void initVisualMethods()
-	{
-		this.visualMethodList.clear();
-		
-		AbstractVisualMethodVisitor visualMethodVisitor;
-		
-		if (cframe.getVmethod() instanceof NodeLinkVisualizationMethod)
-		{
-			// Визуальзация Prefuse
-			visualMethodVisitor = new VisNodeLinkPrefuseVisitor();
-			visualMethodVisitor.setNameVisualMethod("Prefuse");
-			visualMethodVisitor.setCfOnt(cfOnt);
-
-			this.visualMethodList.add(visualMethodVisitor);
-
-			// Визуализация Graph Stream
-			visualMethodVisitor = new VisNodeLinkGraphStreamVisitor();
-			visualMethodVisitor.setNameVisualMethod("Graph Stream");
-			visualMethodVisitor.setCfOnt(cfOnt);
-
-			this.visualMethodList.add(visualMethodVisitor);
-			
-			// Визуализация Cajun
-			visualMethodVisitor = new VisNodeLinkCajunVisitor();
-			visualMethodVisitor.setNameVisualMethod("Cajun");
-			visualMethodVisitor.setCfOnt(cfOnt);
-
-			this.visualMethodList.add(visualMethodVisitor);
-		}
-
-	}
-	
-	@Override
-	public void builderViewer()
-	{
-		for (VisualMethodVisitorInt visualMethodVisitor : this.visualMethodList)
-		{
-			this.accept(visualMethodVisitor);
-		}
 	}
 
 	@Override
     public void accept(VisualMethodVisitorInt visitor)
     {
-		if (!visitor.isVisitViewer())
+		if (cframe instanceof PartonomyCFrame)
 		{
-			if (cframe instanceof PartonomyCFrame)
+			visitor.visit((PartonomyCFrame) cframe);
+		} else
+		{
+			if (cframe instanceof TaxonomyCFrame)
 			{
-				visitor.visit((PartonomyCFrame) cframe);
+				visitor.visit((TaxonomyCFrame) cframe);
 			} else
 			{
-				if (cframe instanceof TaxonomyCFrame)
+				if (cframe instanceof DependencyCFrame)
 				{
-					visitor.visit((TaxonomyCFrame) cframe);
+					visitor.visit((DependencyCFrame) cframe);
 				} else
 				{
-					if (cframe instanceof DependencyCFrame)
+					if (cframe instanceof SpecialCFrame)
 					{
-						visitor.visit((DependencyCFrame) cframe);
-					} else
-					{
-						if (cframe instanceof SpecialCFrame)
-						{
-							visitor.visit((SpecialCFrame) cframe);
-						}
+						visitor.visit((SpecialCFrame) cframe);
 					}
 				}
 			}
-			
-			visitor.setVisitViewer(true);
 		}
     }
-	
-	
-	/**Получить список визуальных методов.*/
-	public ArrayList<VisualMethodVisitorInt> getVisualMethodList()
-	{
-		return visualMethodList;
-	}
 
 	//=========Методы CFrame=============
     public void accept(CFrameVisitor visitor)
@@ -137,6 +78,12 @@ public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualization
     	this.cframe.accept(visitor);
     }
 	
+	@Override
+	public CFrameVisualisationMethod getVisualMethod()
+	{
+		return this.cframe.getVmethod();
+	}
+    
 	public CFrameContent getContent()
 	{
 		return this.cframe.getContent();
@@ -155,7 +102,8 @@ public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualization
 		return this.cframe.getCFrameOWLClass();
 	}
 
-	public CFrame getCframe() {
+	public CFrame getCframe() 
+	{
 		return cframe;
 	}
 	
@@ -168,11 +116,6 @@ public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualization
 	public CFrameOnt getCfOnt()
 	{
 		return cfOnt;
-	}
-
-	public void setCfOnt(CFrameOnt cfOnt)
-	{
-		this.cfOnt = cfOnt;
 	}
 
 	/**Получить название концепта CFrame.*/
@@ -189,8 +132,6 @@ public class CFrameDecorator implements CFrameDecoratorInt, ContentVisualization
 	public void setCframe(CFrame cframe)
 	{
 		this.cframe = cframe;
-		
-		this.initVisualMethods();
 		
 		targetName = cfOnt.getLabel(this.cframe.getTrgConcept().getIRI(), Language.UPO_LANG);
 		if(targetName.equals("_EMPTY_"))

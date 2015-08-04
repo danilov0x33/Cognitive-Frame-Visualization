@@ -1,6 +1,5 @@
 package ru.iimm.ontology.visualization.tools;
 
-import org.protege.editor.owl.model.OWLModelManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -105,7 +104,7 @@ public class VisNodeLinkCajunVisitor extends AbstractVisualMethodVisitor
 		}
 	}
 	
-	@Override
+	/*@Override
 	public GUIVisualMethodInt getVisualization()
 	{
 		return this.cajunGUI;
@@ -116,7 +115,7 @@ public class VisNodeLinkCajunVisitor extends AbstractVisualMethodVisitor
 	{
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 	@Override
 	public void visit(TaxonomyCFrame tFrame)

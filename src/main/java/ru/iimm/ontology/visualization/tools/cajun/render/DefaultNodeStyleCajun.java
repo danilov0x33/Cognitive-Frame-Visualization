@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import ca.uvic.cs.chisel.cajun.graph.node.DefaultGraphNodeStyle;
-import ru.iimm.ontology.visualization.tools.cajun.render.tools.ConstantCajun;
+import ru.iimm.ontology.visualization.tools.cajun.ConstantCajun;
 
 /**
  * Стандарт стиль для элементов.

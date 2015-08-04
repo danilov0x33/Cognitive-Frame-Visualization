@@ -54,12 +54,12 @@ public class OWLModelManagerDecorator implements OWLModelManagerDecoratorInt, Co
 	@Override
     public void accept(VisualMethodVisitorInt visitor)
     {
-		if (!visitor.isVisitViewer())
+		/*if (!visitor.isVisitViewer())
 		{
 			visitor.visit(this.manager, this.ontology, this.reasoner);
 			
 			visitor.setVisitViewer(true);
-		}
+		}*/
     }
 
 	

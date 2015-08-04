@@ -91,12 +91,12 @@ public class VisNodeLinkGraphStreamVisitor extends AbstractVisualMethodVisitor
 		return this.gsGUI;
 	}
 
-	@Override
+	/*@Override
 	public void disposeView()
 	{
 		this.view.setEnabled(false);
 		this.view.setMouseManager(null);
-	}
+	}*/
 	
 	private void defaultVisit(CFrame frame) 
 	{

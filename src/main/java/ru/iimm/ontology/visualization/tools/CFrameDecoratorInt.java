@@ -1,8 +1,7 @@
 package ru.iimm.ontology.visualization.tools;
 
-import java.util.ArrayList;
-
 import ru.iimm.ontology.cftools.CFrame;
+import ru.iimm.ontology.cftools.CFrameVisualisationMethod;
 
 /**
  * Интерфейс оболочки для CFrame.
@@ -11,12 +10,8 @@ import ru.iimm.ontology.cftools.CFrame;
  */
 public interface CFrameDecoratorInt
 {
-	/**Создает визуализацию для CFrame.*/
-	public void builderViewer();
-	
-	public ArrayList<VisualMethodVisitorInt> getVisualMethodList();
-	
 	/**Возвращает CFrame.*/
 	public CFrame getCframe();
 	public void setCframe(CFrame cframe);
+	public CFrameVisualisationMethod getVisualMethod();
 }

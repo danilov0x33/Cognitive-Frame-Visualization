@@ -51,7 +51,7 @@ public class MainFrame extends JFrame implements GUIElementInt
     	this.setPreferredSize(new Dimension(800, 600));
     	//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     	
-    	//=====Главная панель окна=======
+    	//=====Главная панель окна========
     	this.contentPanel = new JPanel(new BorderLayout());
     	
     	//=====Меню бар=====

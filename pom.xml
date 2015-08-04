@@ -114,7 +114,7 @@
 
 	<!-- Сценарий для построения проекта -->
 	<build>
-		<outputDirectory>target/bin</outputDirectory>
+		<outputDirectory>target/classes</outputDirectory>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<defaultGoal>clean compile assembly:single</defaultGoal>
 

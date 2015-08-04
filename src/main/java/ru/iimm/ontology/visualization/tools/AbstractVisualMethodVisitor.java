@@ -46,11 +46,11 @@ public abstract class AbstractVisualMethodVisitor implements VisualMethodVisitor
 		this.setVisitViewer(true);
 	}
 	
-	@Override
+	/*@Override
 	public void visit(OWLOntologyManager manager, OWLOntology ontology, OWLReasoner reasoner)
 	{
 		this.setVisitViewer(true);
-	}
+	}*/
 	
 	@Override
 	public void visit(PartonomyCFrame pFrame)

@@ -1,4 +1,4 @@
-package ru.iimm.ontology.visualization.tools.cajun.render.tools;
+package ru.iimm.ontology.visualization.tools.cajun;
 
 /**
  * Константы для пакеджа cajun.

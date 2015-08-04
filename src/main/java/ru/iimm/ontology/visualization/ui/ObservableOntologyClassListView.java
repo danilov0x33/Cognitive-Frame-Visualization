@@ -56,16 +56,15 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 	private OWLEditorKit owlEditorKit;
 	/**Активная онтология.*/
 	private Ontology ontology;
-	/**Панель, в которой содержится список с CFrame.*/
-	private JPanel cfOntClassListPanel;
 	/**Панель, в которой содержится список с OWLCLass из Protege.*/
 	private JPanel owlEditorKitClassListPanel;
 	/**Панель, в которой содержится список с OWLCLass.*/
 	private JPanel owlClassListPanel;
 	/**Дерево для OWLClass.*/
 	private JTree owlClassTree;
-	/**Дерево для OWLClass.*/
+	private JPanel cfOntClassListPanel;
 	private JTree cfOntClassTree;
+
 
 	/**
 	 * {@linkplain ObservableOntologyClassListView}
@@ -323,7 +322,7 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 		this.cfOntClassListPanel.setPreferredSize(new Dimension(300, 100));
 
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Thing");
-		
+
 		this.cfOntClassTree = new JTree(top);
 		this.cfOntClassTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		
@@ -366,13 +365,13 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 					DefaultMutableTreeNode childNodeTargetFrame = new DefaultMutableTreeNode(cFrameViewImpl.getTypeCFrame());
 					childNodeTargetFrame.setUserObject(cFrameViewImpl);
 					
-					for(VisualMethodVisitorInt vis : cFrameViewImpl.getVisualMethodList())
+					/*for(VisualMethodVisitorInt vis : cFrameViewImpl.getVisualMethodList())
 					{
 						DefaultMutableTreeNode visMethodTargetFrame = new DefaultMutableTreeNode(vis.getNameVisualMethod());
 						visMethodTargetFrame.setUserObject(vis);
 						
 						childNodeTargetFrame.add(visMethodTargetFrame);
-					}
+					}*/
 					
 					childNodeFrame.add(childNodeTargetFrame);
 					
@@ -388,13 +387,13 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 				DefaultMutableTreeNode childNodeTargetFrame = new DefaultMutableTreeNode(cFrameViewImpl.getTypeCFrame());
 				childNodeTargetFrame.setUserObject(cFrameViewImpl);
 				
-				for(VisualMethodVisitorInt vis : cFrameViewImpl.getVisualMethodList())
+				/*for(VisualMethodVisitorInt vis : cFrameViewImpl.getVisualMethodList())
 				{
 					DefaultMutableTreeNode visMethodTargetFrame = new DefaultMutableTreeNode(vis.getNameVisualMethod());
 					visMethodTargetFrame.setUserObject(vis);
 					
 					childNodeTargetFrame.add(visMethodTargetFrame);
-				}
+				}*/
 				
 				childNodeFrame.add(childNodeTargetFrame);
 				
@@ -497,7 +496,7 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 	@Override
 	public void notifyCFrameObserverOntClassList(CFrameDecoratorInt cFrameDecorator)
 	{
-		cFrameDecorator.builderViewer();
+		//cFrameDecorator.builderViewer();
 
 		for (ObserverOntClassListInt o : this.observerList)
 		{
@@ -520,7 +519,7 @@ public class ObservableOntologyClassListView extends JTabbedPane implements Obse
 	@Override
     public void notifyVisualMethodObserverOntClassList(CFrameDecoratorInt cFrameDecorator, VisualMethodVisitorInt visualMethodBuilderInt)
     {
-		cFrameDecorator.builderViewer();
+		//cFrameDecorator.builderViewer();
 		
 		for (ObserverOntClassListInt o : this.observerList)
 		{

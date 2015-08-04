@@ -6,7 +6,6 @@ import ca.uvic.cs.chisel.cajun.graph.arc.DefaultGraphArcStyle;
 import ca.uvic.cs.chisel.cajun.graph.arc.GraphArc;
 import ca.uvic.cs.chisel.cajun.graph.node.DefaultGraphNodeStyle;
 import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
-import ru.iimm.ontology.visualization.tools.cajun.render.tools.ConstantCajun;
 
 /**
  * Оболочка для cajun-графа.

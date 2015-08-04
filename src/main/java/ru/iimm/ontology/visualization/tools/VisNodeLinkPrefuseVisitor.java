@@ -89,7 +89,7 @@ public class VisNodeLinkPrefuseVisitor extends AbstractVisualMethodVisitor
 		}
 	}
 	
-	@Override
+	/*@Override
 	public void visit(OWLOntologyManager manager, OWLOntology ontology, OWLReasoner reasoner)
 	{
 		
@@ -109,7 +109,7 @@ public class VisNodeLinkPrefuseVisitor extends AbstractVisualMethodVisitor
 		this.display = new DisplayPrefuse(vis,this.graph);	
 		
 		this.initGUI();
-	}
+	}*/
 	
 	private void defaultVisit(CFrame frame)
 	{
@@ -177,7 +177,7 @@ public class VisNodeLinkPrefuseVisitor extends AbstractVisualMethodVisitor
 	}
 
 
-	@Override
+	/*@Override
 	public GUIVisualMethodInt getVisualization()
 	{
 		return this.prefuseGUI;
@@ -187,7 +187,7 @@ public class VisNodeLinkPrefuseVisitor extends AbstractVisualMethodVisitor
 	public void disposeView()
 	{
 		this.display.stop();
-	}
+	}*/
 
 	public DisplayPrefuse getDisplay()
 	{

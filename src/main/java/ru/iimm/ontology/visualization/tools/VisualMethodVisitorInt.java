@@ -18,19 +18,19 @@ import ru.iimm.ontology.visualization.ui.GUIVisualMethodInt;
 public interface VisualMethodVisitorInt
 {
 	/**Возвращает компонент с визуализацией.*/
-	public GUIVisualMethodInt getVisualization();
+	//public GUIVisualMethodInt getVisualization();
 	
 	/**Завершает компонент с визуализацией.*/
-	public void disposeView();
+	//public void disposeView();
 	
 	/**Возвращает значение, было ли произведено построение визуализации.*/
-	public boolean isVisitViewer();
+	//public boolean isVisitViewer();
 	
 	/**
 	 * Устанавливает значение, было ли произведено построение визуализации.
 	 * @param b - true - если было построение визуализации.
 	 */
-	public void setVisitViewer(boolean b);
+	//public void setVisitViewer(boolean b);
 	
 	public String getNameVisualMethod();
 	public void setNameVisualMethod(String name);
@@ -44,5 +44,5 @@ public interface VisualMethodVisitorInt
 	/**Создание визуальной части для Special CFrame.*/
 	public void visit(SpecialCFrame sFrame);
 	/**Создание визуальной части для OWLModelManager.*/
-	public void visit(OWLOntologyManager manager, OWLOntology ontology, OWLReasoner reasoner);
+	//public void visit(OWLOntologyManager manager, OWLOntology ontology, OWLReasoner reasoner);
 }

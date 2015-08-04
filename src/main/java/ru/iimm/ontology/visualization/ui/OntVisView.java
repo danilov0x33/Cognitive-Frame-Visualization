@@ -50,10 +50,10 @@ public class OntVisView extends AbstractGUIVisualMethod implements ObserverOntCl
 		
 		this.visTabPanel.removeAll();
 		
-		for (VisualMethodVisitorInt visB : cfDec.getVisualMethodList())
+		/*for (VisualMethodVisitorInt visB : cfDec.getVisualMethodList())
 		{
 			this.addVisualMethodTab(visB);
-		}
+		}*/
 		
 		this.visTabPanel.setSelectedIndex(selectTab);
 	}
@@ -81,7 +81,7 @@ public class OntVisView extends AbstractGUIVisualMethod implements ObserverOntCl
 	 */
 	private void addVisualMethodTab(VisualMethodVisitorInt visualMethod)
 	{
-		this.visTabPanel.addTab(visualMethod.getNameVisualMethod(), visualMethod.getVisualization().getGUIComponent());
+		//this.visTabPanel.addTab(visualMethod.getNameVisualMethod(), visualMethod.getVisualization().getGUIComponent());
 	}
 
 	@Override
