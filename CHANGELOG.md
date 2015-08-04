@@ -23,7 +23,7 @@
 - Remove runnable classes for testing
 - Remove list visitor visual methods in CFrameDecorator and OWLModelManagerDecorator
 - Implemented MVP pattern for Base UI
-- Implemented MVP pattern for visualizations: Cajun, GraphStream
+- Implemented MVP pattern for visualizations: Cajun, GraphStream, Prefuse
 ### Bug Fix
 - Fixed bug in build Maven which conflicted Eclipse.
  

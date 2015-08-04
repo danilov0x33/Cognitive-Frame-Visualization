@@ -13,18 +13,19 @@ import ru.iimm.ontology.visualization.tools.CFrameDecorator;
 import ru.iimm.ontology.visualization.ui.mvp.ModelCFrameOntology;
 
 /**
- *
+ * Реализация интерфейса модели ModelCFrameOntology.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultModelCFrame implements ModelCFrameOntology
 {
+	/**Онтология с КФ.*/
 	private CFrameOnt ont;
-	
+	/**Список с CFrame-обертками.*/
 	private ArrayList<CFrameDecorator> cFrameList;
 	
 	/**
-	 * {@linkplain }
+	 * {@linkplain DefaultModelCFrame}
 	 */
 	public DefaultModelCFrame(CFrameOnt ont)
 	{

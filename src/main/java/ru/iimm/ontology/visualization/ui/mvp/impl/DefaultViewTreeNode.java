@@ -15,16 +15,18 @@ import ru.iimm.ontology.visualization.ui.mvp.PresenterTreeNode;
 import ru.iimm.ontology.visualization.ui.mvp.ViewTreeNode;
 
 /**
- *
+ * Реализация ViewTreeNode.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultViewTreeNode implements ViewTreeNode
 {
+	/**Presenter.*/
 	private PresenterTreeNode present;
-	
+	/**Дерево.*/
 	private JTree cfOntClassTree;
-	private JPanel cfOntClassListPanel;
+	/**Панель с деревом.*/
+	private JPanel mainPanel;
 	
 	/**
 	 * {@linkplain }
@@ -36,10 +38,10 @@ public class DefaultViewTreeNode implements ViewTreeNode
 	
 	private void init()
 	{
-		this.cfOntClassListPanel = new JPanel();
-		this.cfOntClassListPanel.removeAll();
-		this.cfOntClassListPanel.setLayout(new BorderLayout());
-		this.cfOntClassListPanel.setPreferredSize(new Dimension(300, 100));
+		this.mainPanel = new JPanel();
+		this.mainPanel.removeAll();
+		this.mainPanel.setLayout(new BorderLayout());
+		this.mainPanel.setPreferredSize(new Dimension(300, 100));
 
 		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Thing");
 		
@@ -58,7 +60,7 @@ public class DefaultViewTreeNode implements ViewTreeNode
 		
 		JScrollPane northScroll = new JScrollPane(this.cfOntClassTree);
 		
-		this.cfOntClassListPanel.add(northScroll,BorderLayout.CENTER);
+		this.mainPanel.add(northScroll,BorderLayout.CENTER);
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class DefaultViewTreeNode implements ViewTreeNode
 	@Override
 	public Component getViewComponent()
 	{
-		return this.cfOntClassListPanel;
+		return this.mainPanel;
 	}
 
 	@Override

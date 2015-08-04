@@ -7,7 +7,7 @@ package ru.iimm.ontology.visualization.ui.mvp;
  */
 public interface ViewVis extends View
 {
-	/**Запустить визуализацию.*/
+	/**Запустить/инициализировать визуализацию.*/
 	void open();
 	/**Завершить визуализацию.*/
 	void close();

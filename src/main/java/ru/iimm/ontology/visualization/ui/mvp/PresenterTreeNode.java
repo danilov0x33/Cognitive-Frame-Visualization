@@ -3,7 +3,7 @@ package ru.iimm.ontology.visualization.ui.mvp;
 import javax.swing.event.TreeSelectionEvent;
 
 /**
- * Описывает поведение для Presenter-а для TreeNode.
+ * Описывает поведение для Presenter-а для TreeNode элементов.
  * @author Danilov
  * @version 0.1
  */
@@ -26,6 +26,7 @@ public interface PresenterTreeNode
 	 * Обновляет содержимое дерева из модели.
 	 */
 	void updateTreeNodeFromModel();
+	
 	ViewTreeNode getView();
 	void setView(ViewTreeNode view);
 }

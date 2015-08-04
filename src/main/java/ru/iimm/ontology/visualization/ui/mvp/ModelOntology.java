@@ -4,21 +4,12 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 
 /**
- *
+ * Модель предстовляющая онтологию.
  * @author Danilov
  * @version 0.1
  */
 public interface ModelOntology
 {
-
-	/**
-	 * @return
-	 */
 	OWLOntology getOWLOntology();
-
-	/**
-	 * @return
-	 */
 	OWLReasoner getOWLReasoner();
-
 }

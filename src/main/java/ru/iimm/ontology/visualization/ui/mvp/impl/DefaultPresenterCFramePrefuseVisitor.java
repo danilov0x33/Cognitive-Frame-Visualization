@@ -2,31 +2,32 @@ package ru.iimm.ontology.visualization.ui.mvp.impl;
 
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
-import ca.uvic.cs.chisel.cajun.graph.node.GraphNode;
+import prefuse.data.Node;
 import ru.iimm.ontology.cftools.Branch;
 import ru.iimm.ontology.cftools.CFrame;
 import ru.iimm.ontology.cftools.DependencyCFrame;
 import ru.iimm.ontology.cftools.PartonomyCFrame;
 import ru.iimm.ontology.cftools.SpecialCFrame;
 import ru.iimm.ontology.cftools.TaxonomyCFrame;
-import ru.iimm.ontology.visualization.tools.cajun.DefaultGraphModelCajun;
+import ru.iimm.ontology.visualization.tools.prefuse.tools.ConstantsPrefuse;
+import ru.iimm.ontology.visualization.tools.prefuse.tools.DefaultGraphPrefuse;
 import ru.iimm.ontology.visualization.ui.mvp.ModelCFrameOntology;
-import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrameCajunVisitor;
-import ru.iimm.ontology.visualization.ui.mvp.ViewCFrameVisCajun;
+import ru.iimm.ontology.visualization.ui.mvp.PresenterCFramePrefuseVisitor;
+import ru.iimm.ontology.visualization.ui.mvp.ViewCFrameVisPrefuse;
 
 /**
- * Реализация интерфейса Presenter для визуализации CFrame с помощью Cajun.
+ * Реализация интерфейса Presenter для визуализации CFrame с помощью Prefuse.
  * @author Danilov
  * @version 0.1
  */
-public class DefaultPresenterCFrameCajunVisitor implements PresenterCFrameCajunVisitor
+public class DefaultPresenterCFramePrefuseVisitor implements PresenterCFramePrefuseVisitor
 {
 	/**Название визуализации*/
-	private String nameVisMethod = "Cajun";
+	private String nameVisMethod = "Prefuse";
 	/**Модель.*/
 	private ModelCFrameOntology model;
 	/**Визуальный компонент.*/
-	private ViewCFrameVisCajun view;
+	private ViewCFrameVisPrefuse view;
 	
 	@Override
 	public void setModel(ModelCFrameOntology model)
@@ -51,39 +52,40 @@ public class DefaultPresenterCFrameCajunVisitor implements PresenterCFrameCajunV
 	{
 		this.nameVisMethod = name;
 	}
-	
-	private void defaultVisit(CFrame cframe)
+
+	private void defaultVisit(CFrame frame)
 	{
-		DefaultGraphModelCajun graph = this.view.getGraph();
+		DefaultGraphPrefuse graph = view.getGraph();
+
 		graph.clear();
 		
-		for(OWLNamedIndividual owlName : cframe.getContent().getConcepts())
+		for(OWLNamedIndividual owlName : frame.getContent().getConcepts())
 		{
 			String label = this.model.getLabel(owlName);
 			if(label.equals("_EMPTY_"))
 			{
 					label=owlName.getIRI().getFragment().toString();
 			}
+			Node node = graph.addNode(label);
+			node.set(ConstantsPrefuse.DATA_OWL_NAMED_INDIVIDUAL_NODE, owlName);
 			
-			if(owlName.getIRI().equals(cframe.getTrgConcept().getIRI()))
+			if(owlName.getIRI().equals(frame.getTrgConcept().getIRI()))
 			{
-				graph.addNode(owlName, label,true);
+				node.set(ConstantsPrefuse.DATA_TARGET_CON_NODE,true);
 			}
-			else
-			{
-				graph.addNode(owlName, label,false);
-			}
+			
 		}
 		
-		for (Branch branch : cframe.getContent().getBranches())
+		for (Branch branch : frame.getContent().getBranches())
 		{
-			GraphNode sub = null;
-			GraphNode obj = null;
+			Node sub = null;
+			Node obj = null;
 			
-			for(GraphNode node : graph.getAllNodes())
+			for(int i=0; i < graph.getNodeCount(); i++)
 			{
+				Node node = graph.getNode(i);
 				
-				OWLNamedIndividual owlNamedIndividual = (OWLNamedIndividual) node.getUserObject();
+				OWLNamedIndividual owlNamedIndividual = (OWLNamedIndividual) node.get(ConstantsPrefuse.DATA_OWL_NAMED_INDIVIDUAL_NODE);
 				
 				if(owlNamedIndividual.equals(branch.getSubject()))
 				{
@@ -98,20 +100,23 @@ public class DefaultPresenterCFrameCajunVisitor implements PresenterCFrameCajunV
 				}
 				
 				if(sub != null && obj != null)
-				{					
+				{
 					String labelEdge = this.model.getAnnotationValue(branch.getPrp().getIRI());
 					
 					if(labelEdge.equals("_EMPTY_"))
 					{
 						labelEdge=branch.getPrp().getIRI().getFragment().toString();
 					} 
-				
-					graph.addArc(sub, obj);
+					
+					graph.addEdge(labelEdge,sub, obj);
 					
 					break;
 				}
 			}
 		}
+		
+		this.view.getDisplay().start();
+		
 	}
 	
 	@Override
@@ -126,11 +131,13 @@ public class DefaultPresenterCFrameCajunVisitor implements PresenterCFrameCajunV
 		this.defaultVisit(pFrame);
 	}
 
+
 	@Override
 	public void visit(DependencyCFrame dFrame)
 	{
 		this.defaultVisit(dFrame);
 	}
+
 
 	@Override
 	public void visit(SpecialCFrame sFrame)
@@ -139,13 +146,13 @@ public class DefaultPresenterCFrameCajunVisitor implements PresenterCFrameCajunV
 	}
 
 	@Override
-	public void setView(ViewCFrameVisCajun view)
+	public void setView(ViewCFrameVisPrefuse view)
 	{
 		this.view = view;
 	}
 
 	@Override
-	public ViewCFrameVisCajun getView()
+	public ViewCFrameVisPrefuse getView()
 	{
 		return this.view;
 	}

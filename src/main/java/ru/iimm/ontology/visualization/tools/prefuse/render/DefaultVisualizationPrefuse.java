@@ -25,7 +25,7 @@ public class DefaultVisualizationPrefuse extends Visualization
 	{
 		super();
 		
-		this.add(ConstantsPrefuse.GRAPH, new DefaultGraphPrefuse());
+		//this.add(ConstantsPrefuse.GRAPH, new DefaultGraphPrefuse());
 		
 		this.init();
 		
@@ -51,7 +51,6 @@ public class DefaultVisualizationPrefuse extends Visualization
 		//graphPrefuse.randNode();
 		//this.add(ConstantsPrefuse.GRAPH, graphPrefuse);
 		
-
 		//Создаем рендер для элементов
 		DefaultNodeRender nodeRenderer = new DefaultNodeRender();
         //Создаем рендер для ребер
@@ -107,6 +106,8 @@ public class DefaultVisualizationPrefuse extends Visualization
     	this.putAction(ConstantsPrefuse.COLOR, draw);
     	this.putAction(ConstantsPrefuse.ANIMATE, animate);
 
+		this.run(ConstantsPrefuse.COLOR);
+		this.run(ConstantsPrefuse.ANIMATE);
     	//this.runAfter(ConstantsPrefuse.COLOR, ConstantsPrefuse.ANIMATE);
         
 	}

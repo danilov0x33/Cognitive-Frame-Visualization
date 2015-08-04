@@ -24,7 +24,7 @@ import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrameCajunVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.ViewCFrameVisCajun;
 
 /**
- *
+ * Реализация интерфейса View для визуализации CFrame с помощью Cajun.
  * @author Danilov
  * @version 0.1
  */
@@ -32,17 +32,17 @@ public class DefaultViewCFrameVisCajun implements ViewCFrameVisCajun
 {
 	
 	private PresenterCFrameCajunVisitor presenter;
-	/**Панель, на которой расположены*/
+	/**Панель, на которой расположены.*/
 	private JPanel mainPanel;
 	/**Панель, на которой размещается визуализация.*/
 	private JPanel viewPanel;
 	/**ToolBar с различными элементами управления графом.*/
 	private JToolBar toolbar;
-	
+	/**Граф.*/
 	private DefaultGraphModelCajun defaultGraphModel;
 	
 	/**
-	 * {@linkplain }
+	 * {@linkplain DefaultViewCFrameVisCajun}
 	 */
 	public DefaultViewCFrameVisCajun()
 	{

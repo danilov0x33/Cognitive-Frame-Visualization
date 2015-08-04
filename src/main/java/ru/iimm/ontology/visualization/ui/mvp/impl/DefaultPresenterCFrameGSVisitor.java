@@ -3,7 +3,6 @@ package ru.iimm.ontology.visualization.ui.mvp.impl;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
-import org.graphstream.graph.implementations.SingleNode;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import ru.iimm.ontology.cftools.Branch;
@@ -17,15 +16,19 @@ import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrameGSVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.ViewCFrameVisGS;
 
 /**
- *
+ * Реализация интерфейса Presenter для визуализации CFrame с помощью Graph Stream.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultPresenterCFrameGSVisitor implements PresenterCFrameGSVisitor
 {
+	/**Название визуализации*/
 	private String nameVisMethod = "Graph Stream";
+	/**Модель.*/
 	private ModelCFrameOntology model;
+	/**Визуальный компонент.*/
 	private ViewCFrameVisGS view;
+	
 	@Override
 	public void setModel(ModelCFrameOntology model)
 	{

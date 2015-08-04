@@ -12,12 +12,13 @@ import ru.iimm.ontology.visualization.ui.mvp.ModelCFrameOntology;
 import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrame;
 
 /**
- *
+ * Реализация интерфейса Presenter для дерева CFram'ов.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultPresenterCFrameTreeNode extends BasePresenterTreeNode implements PresenterCFrame
 {
+	/**Модель*/
 	private ModelCFrameOntology model;
 
 	@Override

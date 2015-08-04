@@ -29,21 +29,19 @@ import org.graphstream.ui.swingViewer.Viewer;
 import ru.iimm.ontology.visualization.lang.Language;
 import ru.iimm.ontology.visualization.tools.graphStream.DefMouseManager;
 import ru.iimm.ontology.visualization.tools.graphStream.DefShortcutManager;
-import ru.iimm.ontology.visualization.tools.graphStream.DefaultGraph;
-import ru.iimm.ontology.visualization.tools.graphStream.GraphEdge;
-import ru.iimm.ontology.visualization.tools.graphStream.GraphNode;
 import ru.iimm.ontology.visualization.tools.graphStream.style.Style;
-import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrameCajunVisitor;
+import ru.iimm.ontology.visualization.ui.mvp.PresenterCFrameGSVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.ViewCFrameVisGS;
 
 /**
- *
+ * Реализация интерфейса View для визуализации CFrame с помощью Graph Stream.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultViewCFrameVisGS implements ViewCFrameVisGS
 {
-	private PresenterCFrameCajunVisitor presenter;
+	/**Presenter.*/
+	private PresenterCFrameGSVisitor presenter;
 	
 	/**Граф со всеми элементами.*/
 	private MultiGraph graph;
@@ -64,11 +62,10 @@ public class DefaultViewCFrameVisGS implements ViewCFrameVisGS
 	/**Панель для отображения информации по элементам.*/
 	private JPanel informationCFramePanel;
 	private Viewer viewer;
-	
 	private View view;
 	
 	/**
-	 * {@linkplain }
+	 * {@linkplain DefaultViewCFrameVisGS}
 	 */
 	public DefaultViewCFrameVisGS()
 	{
@@ -282,13 +279,13 @@ public class DefaultViewCFrameVisGS implements ViewCFrameVisGS
 	}
 
 	@Override
-	public void setPresenter(PresenterCFrameCajunVisitor presenter)
+	public void setPresenter(PresenterCFrameGSVisitor presenter)
 	{
 		this.presenter = presenter;
 	}
 
 	@Override
-	public PresenterCFrameCajunVisitor getPresenter()
+	public PresenterCFrameGSVisitor getPresenter()
 	{
 		return this.presenter;
 	}
@@ -322,11 +319,6 @@ public class DefaultViewCFrameVisGS implements ViewCFrameVisGS
 		this.contentPanel.setLeftComponent(vPanel);
 		
 		this.mainPanel.updateUI();
-	}
-
-	public void update()
-	{
-		
 	}
 	
 	@Override

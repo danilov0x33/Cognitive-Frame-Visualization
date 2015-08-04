@@ -14,12 +14,13 @@ import ru.iimm.ontology.visualization.ui.mvp.PresenterTreeNode;
 import ru.iimm.ontology.visualization.ui.mvp.ViewTreeNode;
 
 /**
- *
+ * Абстрактный класс для Presenter'ов для TreeNode.
  * @author Danilov
  * @version 0.1
  */
 public abstract class BasePresenterTreeNode implements PresenterTreeNode
 {
+	/**Визуальный компонент.*/
 	protected ViewTreeNode view;
 	
 	@Override

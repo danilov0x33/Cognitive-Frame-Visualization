@@ -8,17 +8,16 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 
 import ru.iimm.ontology.visualization.ui.mvp.ModelOntology;
 import ru.iimm.ontology.visualization.ui.mvp.PresenterOntology;
-import ru.iimm.ontology.visualization.ui.mvp.ViewTreeNode;
 
 /**
- *
+ * Реализация интерфейса Presenter для дерева с OWLClass'ами.
  * @author Danilov
  * @version 0.1
  */
 public class DefaultPresenterOwlClassTreeNode extends BasePresenterTreeNode implements PresenterOntology
 {
+	/**Модель.*/
 	private ModelOntology model;
-	private ViewTreeNode view;
 
 	@Override
 	public void setModel(ModelOntology model)
