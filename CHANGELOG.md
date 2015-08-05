@@ -24,6 +24,8 @@
 - Remove list visitor visual methods in CFrameDecorator and OWLModelManagerDecorator
 - Implemented MVP pattern for Base UI
 - Implemented MVP pattern for visualizations: Cajun, GraphStream, Prefuse
+- Add MultiPresenter redirecting event in presenterVisMethod's: Event->ViewTreeNode->presenterTreeNode->presenterVisMethod->ViewVisMethod
 ### Bug Fix
-- Fixed bug in build Maven which conflicted Eclipse.
+- Fixed bug in build Maven which conflicted Eclipse
+- Fixed bug in thread prefuse visualization
  

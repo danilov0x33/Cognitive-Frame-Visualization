@@ -55,6 +55,8 @@ public class DefaultPresenterCFramePrefuseVisitor implements PresenterCFramePref
 
 	private void defaultVisit(CFrame frame)
 	{
+		this.view.getDisplay().stop();
+		
 		DefaultGraphPrefuse graph = view.getGraph();
 
 		graph.clear();

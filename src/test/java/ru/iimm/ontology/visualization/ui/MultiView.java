@@ -9,9 +9,12 @@ import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultModelCFrame;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultPresenterCFrameCajunVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultPresenterCFrameGSVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultPresenterCFramePrefuseVisitor;
+import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultPresenterCFrameTreeNode;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewCFrameVisCajun;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewCFrameVisGS;
 import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewCFrameVisPrefuse;
+import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewTreeNode;
+import ru.iimm.ontology.visualization.ui.mvp.impl.RedirectingPresenterTreeNodeToVis;
 
 /**
  *
@@ -47,17 +50,20 @@ public class MultiView
 		viewPrefuse.setPresenter(presenterPrefuse);
 		viewPrefuse.open();
 		
+		DefaultViewTreeNode viewTreeNode = new DefaultViewTreeNode();
+		RedirectingPresenterTreeNodeToVis multiPresenter = new RedirectingPresenterTreeNodeToVis();
+		multiPresenter.setModel(model);
+		multiPresenter.setView(viewTreeNode);
+		multiPresenter.addVisualMethod(presenterPrefuse);
+		multiPresenter.addVisualMethod(presenterGS);
+		multiPresenter.addVisualMethod(presenterCajun);
+		viewTreeNode.setPresenter(multiPresenter);
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.addTab("TreeNode", viewTreeNode.getViewComponent());
 		tabbedPane.addTab(presenterCajun.getNameVisualMethod(), viewCajun.getViewComponent());
 		tabbedPane.addTab(presenterGS.getNameVisualMethod(), viewGS.getViewComponent());
 		tabbedPane.addTab(presenterPrefuse.getNameVisualMethod(), viewPrefuse.getViewComponent());
-		
-		CFrameDecorator cFrame = model.getCframes().get(1);
-		
-		cFrame.accept(presenterCajun);
-		cFrame.accept(presenterGS);
-		cFrame.accept(presenterPrefuse);
 		
 		JFrame frame = new JFrame();
 		
@@ -65,11 +71,5 @@ public class MultiView
 		
 		frame.setSize(800, 600);
 		frame.setVisible(true);
-		
-		cFrame = model.getCframes().get(0);
-		
-		cFrame.accept(presenterCajun);
-		cFrame.accept(presenterGS);
-		cFrame.accept(presenterPrefuse);
 	}
 }

@@ -106,8 +106,8 @@ public class DefaultVisualizationPrefuse extends Visualization
     	this.putAction(ConstantsPrefuse.COLOR, draw);
     	this.putAction(ConstantsPrefuse.ANIMATE, animate);
 
-		this.run(ConstantsPrefuse.COLOR);
-		this.run(ConstantsPrefuse.ANIMATE);
+		//this.run(ConstantsPrefuse.COLOR);
+		//this.run(ConstantsPrefuse.ANIMATE);
     	//this.runAfter(ConstantsPrefuse.COLOR, ConstantsPrefuse.ANIMATE);
         
 	}
