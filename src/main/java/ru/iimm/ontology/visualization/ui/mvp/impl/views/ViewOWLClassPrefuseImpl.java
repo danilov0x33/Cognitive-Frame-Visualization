@@ -4,7 +4,7 @@ import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterOwlClassPrefuse
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewOwlClassVisPrefuse;
 
 /**
- *
+ * View для визуализации иерарзии OWLClass'ов с помощью Prefuse.
  * @author Danilov
  * @version 0.1
  */

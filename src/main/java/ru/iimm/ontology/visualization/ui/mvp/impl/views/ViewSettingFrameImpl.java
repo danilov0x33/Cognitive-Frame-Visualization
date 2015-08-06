@@ -27,9 +27,10 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewSettingFrame;
  */
 public class ViewSettingFrameImpl implements ViewSettingFrame
 {
-    private static final long serialVersionUID = -8283429844830782661L;
+
     private JDialog jDialog;
     private PresenterSettingFrame presenter;
+    
     /**
      * {@linkplain ViewSettingFrameImpl}
      */

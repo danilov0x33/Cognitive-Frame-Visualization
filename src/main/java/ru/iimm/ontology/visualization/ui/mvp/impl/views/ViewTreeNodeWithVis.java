@@ -11,7 +11,7 @@ import ru.iimm.ontology.visualization.ui.mvp.views.View;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVis;
 
 /**
- *
+ * View содержит в себе множество деревьев объектов (CFrame, OWLClass) и визуализации.
  * @author Danilov
  * @version 0.1
  */

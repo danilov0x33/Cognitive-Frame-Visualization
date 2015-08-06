@@ -7,7 +7,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelOwlOntology;
 
 /**
- *
+ * Реализация интерфейса {@linkplain ModelOwlOntology}
  * @author Danilov
  * @version 0.1
  */
@@ -16,8 +16,9 @@ public class ModelOwlOntologyImpl implements ModelOwlOntology
 	private OWLOntology owlOntology;
 	private OWLReasoner owlReas;
 	private OWLOntologyManager ontMg;
+	
 	/**
-	 * {@linkplain }
+	 * {@linkplain ModelOwlOntologyImpl}
 	 */
 	public ModelOwlOntologyImpl(OWLOntologyManager ontMg, OWLOntology owlOntology, OWLReasoner owlReas)
 	{

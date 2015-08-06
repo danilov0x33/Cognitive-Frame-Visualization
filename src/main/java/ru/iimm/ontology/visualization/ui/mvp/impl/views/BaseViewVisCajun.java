@@ -20,7 +20,6 @@ import edu.umd.cs.piccolox.swing.PScrollPane;
 import ru.iimm.ontology.visualization.tools.cajun.DefaultGraphModelCajun;
 import ru.iimm.ontology.visualization.tools.cajun.render.DefaultArcStyleCajun;
 import ru.iimm.ontology.visualization.tools.cajun.render.DefaultNodeStyleCajun;
-import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameCajunVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisCajun;
 
 /**

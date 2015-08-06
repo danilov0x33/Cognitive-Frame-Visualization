@@ -11,9 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import ru.iimm.ontology.visualization.lang.Language;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterMainFrame;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewMainFrame;
@@ -24,9 +21,7 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewMainFrame;
  *
  */
 public class ViewMainFrameImpl implements ViewMainFrame
-{
-    private static final Logger log = LoggerFactory.getLogger(ViewMainFrameImpl.class);
-    
+{    
     private PresenterMainFrame presenter;
 	/**Главная панель окна*/
     private JPanel contentPanel;

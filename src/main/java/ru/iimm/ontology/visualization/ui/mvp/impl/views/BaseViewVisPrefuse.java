@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import ru.iimm.ontology.visualization.tools.prefuse.DisplayPrefuse;
 import ru.iimm.ontology.visualization.tools.prefuse.render.DefaultVisualizationPrefuse;
 import ru.iimm.ontology.visualization.tools.prefuse.tools.DefaultGraphPrefuse;
-import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFramePrefuseVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisPrefuse;
 
 /**

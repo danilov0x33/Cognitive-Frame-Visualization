@@ -5,9 +5,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import ru.iimm.ontology.visualization.lang.Language;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelCFrameOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelMultiOntologyImpl;
@@ -15,7 +12,6 @@ import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelOwlOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisCajunImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisGSImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisPrefuseImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewMainFrameImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewOWLClassPrefuseImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewSettingFrameImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeImpl;
@@ -31,7 +27,6 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewMainFrame;
  */
 public class PresenterMainFrameImpl implements PresenterMainFrame
 {
-	private static final Logger log = LoggerFactory.getLogger(ViewMainFrameImpl.class);
 	private ViewMainFrame view;
 	private ModelMultiOntology model;
 	

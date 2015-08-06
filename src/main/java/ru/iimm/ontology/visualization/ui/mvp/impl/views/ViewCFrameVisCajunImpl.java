@@ -4,7 +4,7 @@ import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameCajunVisi
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewCFrameVisCajun;
 
 /**
- *
+ * View для визуализации CFrame с помощью Cajun.
  * @author Danilov
  * @version 0.1
  */

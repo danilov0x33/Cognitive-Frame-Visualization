@@ -29,7 +29,7 @@ public class ViewTreeNodeImpl implements ViewTreeNode
 	private JPanel mainPanel;
 	
 	/**
-	 * {@linkplain }
+	 * {@linkplain ViewTreeNodeImpl}
 	 */
 	public ViewTreeNodeImpl()
 	{

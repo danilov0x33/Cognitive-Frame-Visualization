@@ -4,7 +4,7 @@ import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameGSVisitor
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewCFrameVisGS;
 
 /**
- *
+ * View для визуализации CFrame с помощью Graph Stream.
  * @author Danilov
  * @version 0.1
  */

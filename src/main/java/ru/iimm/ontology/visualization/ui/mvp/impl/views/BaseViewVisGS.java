@@ -30,7 +30,6 @@ import ru.iimm.ontology.visualization.lang.Language;
 import ru.iimm.ontology.visualization.tools.graphStream.DefMouseManager;
 import ru.iimm.ontology.visualization.tools.graphStream.DefShortcutManager;
 import ru.iimm.ontology.visualization.tools.graphStream.style.Style;
-import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameGSVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisGS;
 
 /**

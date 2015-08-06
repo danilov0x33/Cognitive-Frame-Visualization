@@ -9,7 +9,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterOwlClassPrefuse;
 
 /**
- *
+ * Перенаправление event'ов из дерева с OWLClass'ами в {@linkplain PresenterOwlClassPrefuse}.
  * @author Danilov
  * @version 0.1
  */

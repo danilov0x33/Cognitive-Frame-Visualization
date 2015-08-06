@@ -4,7 +4,7 @@ import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFramePrefuseVi
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewCFrameVisPrefuse;
 
 /**
- *
+ * View для визуализации CFrame с помощью Prefuse.
  * @author Danilov
  * @version 0.1
  */
