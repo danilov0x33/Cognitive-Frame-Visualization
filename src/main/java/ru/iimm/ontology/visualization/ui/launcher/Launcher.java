@@ -2,6 +2,9 @@ package ru.iimm.ontology.visualization.ui.launcher;
 
 import javax.swing.SwingUtilities;
 
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterMainFrameImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewMainFrameImpl;
+
 /**
  * Лаунчер приложения. Запускает главное окно.
  * @author Danilov E.Y.
@@ -15,8 +18,12 @@ public class Launcher
 			@Override
 			public void run()
 			{
-				MainFrame frame = new MainFrame();
-				frame.setVisible(true);
+				PresenterMainFrameImpl presenter = new PresenterMainFrameImpl();
+				ViewMainFrameImpl view = new ViewMainFrameImpl();
+				presenter.setView(view);
+				view.setPresenter(presenter);
+				
+				presenter.show();
 			}
 		});
 	}

@@ -2,11 +2,10 @@ package ru.iimm.ontology.visualization.ui;
 
 import javax.swing.JFrame;
 
-import ru.iimm.ontology.visualization.tools.CFrameDecorator;
-import ru.iimm.ontology.visualization.tools.OntologyManager;
-import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultModelCFrame;
-import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultPresenterCFramePrefuseVisitor;
-import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewCFrameVisPrefuse;
+import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelMultiOntologyImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelOwlOntologyImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterOwlClassPrefuseImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewOWLClassPrefuseImpl;
 
 /**
  *
@@ -15,38 +14,25 @@ import ru.iimm.ontology.visualization.ui.mvp.impl.DefaultViewCFrameVisPrefuse;
  */
 public class TestPrefuse
 {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
+	public static void main(String[] argv)
 	{
-		OntologyManager ont = new OntologyManager("CognitiveFrameVisualization\\network-tech-ont.owl\\rez-cfo\\", "ontUPO.owl", false, false, true);
+		ModelMultiOntologyImpl model = new ModelMultiOntologyImpl("CognitiveFrameVisualization/network-tech-ont.owl/rez-cfo/", "ontUPO.owl", false, false, true);
 		
-		DefaultModelCFrame model = new DefaultModelCFrame(ont.getCongitiveFrameOntology());
-		DefaultViewCFrameVisPrefuse view = new DefaultViewCFrameVisPrefuse();
+		PresenterOwlClassPrefuseImpl presenter = new PresenterOwlClassPrefuseImpl();
+		ViewOWLClassPrefuseImpl view = new ViewOWLClassPrefuseImpl();
 		
-		DefaultPresenterCFramePrefuseVisitor presenter = new DefaultPresenterCFramePrefuseVisitor();
-		presenter.setModel(model);
+		model.setPresenter(presenter);
+		presenter.setModel(new ModelOwlOntologyImpl(model.getCongitiveFrameOntology().mng, model.getCongitiveFrameOntology().ontInMem, model.getCongitiveFrameOntology().reas));
 		presenter.setView(view);
 		
 		view.setPresenter(presenter);
 		view.open();
-		
-		CFrameDecorator cFrame = model.getCframes().get(1);
-		
-		//cFrame.accept(presenter);
-		
+		//presenter.updateGraphFromModel();
 		JFrame frame = new JFrame();
-		
+		frame.setSize(800, 600);
 		frame.getContentPane().add(view.getViewComponent());
 		
-		frame.setSize(800, 600);
 		frame.setVisible(true);
 		
-		cFrame = model.getCframes().get(0);
-		
-		cFrame.accept(presenter);
 	}
-
 }
