@@ -18,6 +18,8 @@ public interface PresenterMainFrame extends PresenterFrame
 	
 	/**Загрузить отнологию из файла выбранного пользователем.*/
 	void loadOntologyFromFileChooser();
+	/**Инициализация визуализации.*/
+	void initVisualization();
 	/**Открыть окно с настройками.*/
 	void showSettingFrame();
 }

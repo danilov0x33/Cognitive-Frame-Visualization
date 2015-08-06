@@ -52,6 +52,9 @@ public class PresenterOwlClassPrefuseImpl implements PresenterOwlClassPrefuse
 	@Override
 	public void centerOwlClass(OWLClass owlClass)
 	{
+		if(view == null)
+			return;
+		
 		TupleSet set = this.view.getGraph().getNodes();
 		
 		@SuppressWarnings("rawtypes")

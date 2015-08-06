@@ -27,6 +27,7 @@ public class ViewMainFrameImpl implements ViewMainFrame
     private JPanel contentPanel;
     private JFrame mainFrame;
 	private JMenuItem menuItemLoadOntology;
+	private JMenu menuItemVisualizations;
     
     /**
      * {@linkplain ViewMainFrameImpl}
@@ -54,6 +55,8 @@ public class ViewMainFrameImpl implements ViewMainFrame
     	this.menuItemLoadOntology = new JMenuItem(Language.MENU_ITEM_LOAD_ONT);
     	JMenuItem menuItemSetting = new JMenuItem(Language.MENU_ITEM_SETTING);
     	
+    	this.menuItemVisualizations = new JMenu(Language.MENU_ITEM_VISUALIZATIONS);
+    	
     	this.menuItemLoadOntology.addActionListener(new ActionListener() 
     	{	
 			public void actionPerformed(ActionEvent e) 
@@ -77,6 +80,7 @@ public class ViewMainFrameImpl implements ViewMainFrame
     	menuFile.add(menuItemExit);
     	
     	menuBar.add(menuFile);
+    	menuBar.add(this.menuItemVisualizations);
     	
     	this.mainFrame.setJMenuBar(menuBar);
     	this.mainFrame.getContentPane().add(this.contentPanel, BorderLayout.CENTER);
@@ -119,5 +123,11 @@ public class ViewMainFrameImpl implements ViewMainFrame
 	{
     	this.contentPanel.add(component, BorderLayout.CENTER);
     	this.contentPanel.updateUI();
+	}
+
+	@Override
+	public JMenu getMenuItemVisualization()
+	{
+		return this.menuItemVisualizations;
 	}
 }

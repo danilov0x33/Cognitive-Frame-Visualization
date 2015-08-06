@@ -17,6 +17,7 @@ public abstract class Language
 	public static String MENU_ITEM_EXIT = "Exit";
 	public static String MENU_ITEM_LOAD_ONT = "Load Ontology...";
 	public static String MENU_ITEM_SETTING = "Setting";
+	public static String MENU_ITEM_VISUALIZATIONS = "Visualizations";
 	//=====================BUTTONS=========================
 	public static String BUTTON_SETTING_ONTOLOGY = "Setting Ontology";
 	public static String BUTTON_SETTING_VIS = "Setting Visualization";

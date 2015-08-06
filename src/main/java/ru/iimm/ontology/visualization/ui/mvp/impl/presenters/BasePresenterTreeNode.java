@@ -28,41 +28,6 @@ public abstract class BasePresenterTreeNode implements PresenterTreeNode
 	{
 		this.view.setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 	}
-
-	@Override
-	public void updateCellRenderer()
-	{
-		this.view.setCellRenderer(new TreeCellRenderer()
-		{
-            private JLabel label = new JLabel();
-     
-            public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-                Object o = ((DefaultMutableTreeNode) value).getUserObject();
-                if (o instanceof CFrameDecorator) 
-                {
-                	CFrameDecorator cFrameDecorator = (CFrameDecorator) o;
-
-                    label.setText(cFrameDecorator.getTypeCFrame());
-                } 
-                else 
-                {
-                    label.setIcon(null);
-                    label.setText("" + value);
-                }
-                
-                if(selected)
-                {
-                	label.setForeground(Color.BLUE);
-                }
-                else
-                {
-                	label.setForeground(Color.BLACK);
-                }
-                
-                return label;
-            }
-		});
-	}
 	
 	@Override
 	public ViewTreeNode getView()

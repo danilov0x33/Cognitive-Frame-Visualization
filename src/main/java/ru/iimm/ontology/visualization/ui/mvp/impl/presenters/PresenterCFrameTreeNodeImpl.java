@@ -1,11 +1,16 @@
 package ru.iimm.ontology.visualization.ui.mvp.impl.presenters;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.swing.JLabel;
+import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeCellRenderer;
 
 import ru.iimm.ontology.visualization.tools.CFrameDecorator;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelCFrameOntology;
@@ -122,6 +127,41 @@ public class PresenterCFrameTreeNodeImpl extends BasePresenterTreeNode implement
 	public ModelCFrameOntology getModel()
 	{
 		return this.model;
+	}
+
+	@Override
+	public void updateCellRenderer()
+	{
+		this.view.setCellRenderer(new TreeCellRenderer()
+		{
+            private JLabel label = new JLabel();
+     
+            public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+                Object o = ((DefaultMutableTreeNode) value).getUserObject();
+                if (o instanceof CFrameDecorator) 
+                {
+                	CFrameDecorator cFrameDecorator = (CFrameDecorator) o;
+
+                    label.setText(cFrameDecorator.getTypeCFrame());
+                } 
+                else 
+                {
+                    label.setIcon(null);
+                    label.setText("" + value);
+                }
+                
+                if(selected)
+                {
+                	label.setForeground(Color.BLUE);
+                }
+                else
+                {
+                	label.setForeground(Color.BLACK);
+                }
+                
+                return label;
+            }
+		});
 	}
 
 }

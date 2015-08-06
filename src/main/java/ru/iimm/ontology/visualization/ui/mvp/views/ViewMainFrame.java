@@ -3,6 +3,7 @@ package ru.iimm.ontology.visualization.ui.mvp.views;
 import java.awt.Component;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterMainFrame;
 
@@ -23,4 +24,6 @@ public interface ViewMainFrame
 	void setTitle(String title);
 	/**Заполнить контент окна.*/
 	void setContentPane(Component component);
+	
+	JMenu getMenuItemVisualization();
 }

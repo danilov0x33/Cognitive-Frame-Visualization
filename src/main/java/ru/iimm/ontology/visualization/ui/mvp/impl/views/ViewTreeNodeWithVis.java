@@ -23,7 +23,6 @@ public class ViewTreeNodeWithVis implements View
 	private JTabbedPane classListTabPanel;
 	private JTabbedPane visTabPanel;
 	
-	
 	/**
 	 * {@linkplain ViewTreeNodeWithVis}
 	 */
@@ -62,8 +61,15 @@ public class ViewTreeNodeWithVis implements View
 	public void addVisualization(ViewVis view, String tabName)
 	{
 		view.open();
-		
+
 		this.visTabPanel.addTab(tabName, view.getViewComponent());
+	}
+
+	public void removeVisualization(ViewVis viewCajunCF)
+	{
+		viewCajunCF.close();
+		
+		//this.visTabPanel.remove(viewCajunCF.getViewComponent());
 	}
 	
 	
