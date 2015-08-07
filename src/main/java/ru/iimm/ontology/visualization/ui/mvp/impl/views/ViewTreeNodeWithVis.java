@@ -62,14 +62,14 @@ public class ViewTreeNodeWithVis implements View
 	{
 		view.open();
 
-		this.visTabPanel.addTab(tabName, view.getViewComponent());
+		this.visTabPanel.add(tabName, view.getViewComponent());
 	}
 
-	public void removeVisualization(ViewVis viewCajunCF)
+	public void removeVisualization(ViewVis view, String tabName)
 	{
-		viewCajunCF.close();
+		view.close();
 		
-		//this.visTabPanel.remove(viewCajunCF.getViewComponent());
+		this.visTabPanel.remove(this.visTabPanel.indexOfTab(tabName));
 	}
 	
 	

@@ -217,7 +217,7 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 				else
 				{
 					redPresenter.removeVisualMethod(presCajun);
-					multiView.removeVisualization(viewCajunCF);
+					multiView.removeVisualization(viewCajunCF, presCajun.getNameVisualMethod());
 				}
 			}
 		});
@@ -245,7 +245,7 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 				else
 				{
 					redPresenter.removeVisualMethod(presPref);
-					multiView.removeVisualization(viewPref);
+					multiView.removeVisualization(viewPref,presPref.getNameVisualMethod());
 				}
 			}
 		});
@@ -267,13 +267,13 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 					viewGSCF.setPresenter(presGS);
 					
 					redPresenter.addVisualMethod(presGS);
-					
+
 					multiView.addVisualization(viewGSCF, presGS.getNameVisualMethod());
 				}
 				else
 				{
 					redPresenter.removeVisualMethod(presGS);
-					multiView.removeVisualization(viewGSCF);
+					multiView.removeVisualization(viewGSCF, presGS.getNameVisualMethod());
 				}
 			}
 		});
@@ -298,7 +298,7 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 				}
 				else
 				{
-					multiView.removeVisualization(viewOwlPrefuse);
+					multiView.removeVisualization(viewOwlPrefuse, "Prefuse - Ontology");
 				}
 			}
 		});

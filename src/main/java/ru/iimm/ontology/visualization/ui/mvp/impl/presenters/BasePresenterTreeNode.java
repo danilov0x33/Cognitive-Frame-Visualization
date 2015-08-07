@@ -1,15 +1,7 @@
 package ru.iimm.ontology.visualization.ui.mvp.impl.presenters;
 
-import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JLabel;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 
-import ru.iimm.ontology.visualization.tools.CFrameDecorator;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterTreeNode;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewTreeNode;
 

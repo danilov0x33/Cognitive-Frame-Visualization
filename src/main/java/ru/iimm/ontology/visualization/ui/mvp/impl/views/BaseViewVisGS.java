@@ -308,10 +308,24 @@ public abstract class BaseViewVisGS implements ViewVisGS
 	@Override
 	public void close()
 	{
-		this.view.setEnabled(false);
-		this.view.setMouseManager(null);
+		this.settingOntologyFrame = null;
 		
-		this.viewer.close();
+		if(this.viewer!=null)
+			this.viewer.close();
+		
+		if(this.graph!=null)
+		{
+			this.graph.clear();
+			this.graph = null;
+		}
+		
+		if(this.view!=null)
+		{
+			this.view.setEnabled(false);
+			this.view.setMouseManager(null);
+			this.view = null;
+		}
+
 	}
 
 	@Override

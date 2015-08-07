@@ -52,7 +52,8 @@ public abstract class BaseViewVisPrefuse implements ViewVisPrefuse
 	@Override
 	public void close()
 	{
-		this.display.stop();
+		if(this.display!= null)
+			this.display.stop();
 	}
 
 	@Override
