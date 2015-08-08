@@ -1,10 +1,5 @@
 /*
-!pom.xml
-!build.xml
-!viewconfig-mainTab.xml
-!plugin.xml
+!/pom.xml
 !/src
-!/log
-!/META-INF
 !*.md
 !.gitignore

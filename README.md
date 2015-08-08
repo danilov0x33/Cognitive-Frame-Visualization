@@ -25,4 +25,4 @@ To build and run the visualizer, you must have the following items installed:
 #### Example plug-in screenshots
 Example visualization cognitive frame concept "Router":
 
-![](http://s32-temporary-files.radikal.ru/4c5b518c98124532947f74bab382ef3c/-929206895.jpg)
+![](http://static1.keep4u.ru/2015/08/08/Pic6.png)
