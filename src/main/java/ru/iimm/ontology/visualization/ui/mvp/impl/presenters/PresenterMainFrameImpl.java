@@ -148,15 +148,11 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		JMenu visCFrame = new JMenu("CFrame");
 		JMenu visOWLClass = new JMenu("OWLClass");
 		
-		JCheckBoxMenuItem visCajunCFrame = new JCheckBoxMenuItem("Cajun");		
-		JCheckBoxMenuItem visPrefuseCFrame = new JCheckBoxMenuItem("Prefuse");	
-		JCheckBoxMenuItem visGraphStreamCFrame = new JCheckBoxMenuItem("GraphStream");
-		//visCajunCFrame.setEnabled(false);
-		//visPrefuseCFrame.setEnabled(false);
-		//visGraphStreamCFrame.setEnabled(false);
+		final JCheckBoxMenuItem visCajunCFrame = new JCheckBoxMenuItem("Cajun");		
+		final JCheckBoxMenuItem visPrefuseCFrame = new JCheckBoxMenuItem("Prefuse");	
+		final JCheckBoxMenuItem visGraphStreamCFrame = new JCheckBoxMenuItem("GraphStream");
 		
-		JCheckBoxMenuItem visPrefuseOWLClass = new JCheckBoxMenuItem("Prefuse");
-		//visPrefuseOWLClass.setEnabled(false);
+		final JCheckBoxMenuItem visPrefuseOWLClass = new JCheckBoxMenuItem("Prefuse");
 		
 		visCFrame.add(visGraphStreamCFrame);
 		visCFrame.add(visPrefuseCFrame);
@@ -168,19 +164,19 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		visItem.add(visOWLClass);
 		
 		//Presenter который перенаправляет event из TreeNode в  визуализации
-		RedirectingPresenterCFrameTreeNode redPresenter = new RedirectingPresenterCFrameTreeNode();
+		final RedirectingPresenterCFrameTreeNode redPresenter = new RedirectingPresenterCFrameTreeNode();
 		redPresenter.setModel(new ModelCFrameOntologyImpl(this.model.getCongitiveFrameOntology()));
 		//Дерево с фреймами
 		ViewTreeNodeImpl viewTreeNodeCFrame = new ViewTreeNodeImpl();
 		redPresenter.setView(viewTreeNodeCFrame);
 		viewTreeNodeCFrame.setPresenter(redPresenter);
 		//Дерево с иерархией OWLClass'ов
-		PresenterOwlClassPrefuseImpl presenterOwlPref = new PresenterOwlClassPrefuseImpl();		
+		final PresenterOwlClassPrefuseImpl presenterOwlPref = new PresenterOwlClassPrefuseImpl();		
 		presenterOwlPref.setModel(new ModelOwlOntologyImpl(model.getOWLOnt().mng ,model.getOWLOnt().ontInMem, model.getOWLOnt().reas));
 		
-		ViewTreeNodeImpl viewTreeNodeOwl = new ViewTreeNodeImpl();
+		final ViewTreeNodeImpl viewTreeNodeOwl = new ViewTreeNodeImpl();
 		
-		RedirectingPresenterOwlClassTreeNode redPresOnt = new RedirectingPresenterOwlClassTreeNode(presenterOwlPref);
+		final RedirectingPresenterOwlClassTreeNode redPresOnt = new RedirectingPresenterOwlClassTreeNode(presenterOwlPref);
 		redPresOnt.setModel(presenterOwlPref.getModel());
 		redPresOnt.setView(viewTreeNodeOwl);
 
@@ -191,7 +187,7 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		
 		
 		//Все добавляем в контейнер
-		ViewTreeNodeWithVis multiView = new ViewTreeNodeWithVis();
+		final ViewTreeNodeWithVis multiView = new ViewTreeNodeWithVis();
 		multiView.addTreeNode(viewTreeNodeCFrame.getViewComponent(), "Tree CFrames");
 		multiView.addTreeNode(viewTreeNodeOwl.getViewComponent(), "Ontology tree");		
 		

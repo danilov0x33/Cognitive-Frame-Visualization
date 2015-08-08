@@ -5,14 +5,14 @@
 
     <extension id="OntoView" point="org.protege.editor.core.application.ViewComponent">
       <label value="Cognitive Frame Visualizer"/>
-      <class value="ru.iimm.ontology.visplugin.GUI.protege.ProtegeInitPlugin"/>
+      <class value="ru.iimm.ontology.visualization.ui.protege.ProtegeInitPlugin"/>
       <headerColor value="@org.protege.classcolor"/>
       <category value="@org.protege.classcategory"/>
    </extension>
    
    <extension id="OntoTab" point="org.protege.editor.core.application.WorkspaceTab">
-      <label value="Cognitive Frame Visualizer"/>
-      <class value="ru.iimm.ontology.visplugin.GUI.protege.ProtegeWorkspaceTab"/>
+      <label value="Cognitive Frame Visualizer Tab"/>
+      <class value="org.protege.editor.owl.ui.OWLWorkspaceViewsTab"/>
       <index value="AZZZ"/>
       <editorKitId value="OWLEditorKit"/>
       <defaultViewConfigFileName value="viewconfig-mainTab.xml"/>

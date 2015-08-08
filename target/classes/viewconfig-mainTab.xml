@@ -3,7 +3,7 @@
     <VSNode splits="1.0">
         <CNode>
             <Component label="Cognitive Frame Visualizer">
-                <Property id="pluginId" value="ru.iimm.ontology.visplugin.GUI.protege.ProtegeInitPlugin"/>
+                <Property id="pluginId" value="ru.iimm.ontology.visualization.ui.protege.ProtegeInitPlugin"/>
             </Component>
         </CNode>
     </VSNode>

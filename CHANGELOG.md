@@ -13,7 +13,7 @@
 ### Other
 - Edit Maven set libraries
 - Edit Maven Build
-- Add *plugin.xml*, *viewconfig-mainTab.xml*, *META-INF* for build Protege plugin
+- Add *plugin.xml*, *viewconfig-mainTab.xml*, *MANIFEST.MF* for build Protege plugin
 - Add *build.xml* for build in Ant
 - Add *.gitignore*
 
@@ -26,7 +26,13 @@
 - Implemented MVP pattern for visualizations: Cajun, GraphStream, Prefuse
 - Add MultiPresenter redirecting event in presenterVisMethod's: Event->ViewTreeNode->presenterTreeNode->presenterVisMethod->ViewVisMethod
 - Rename OntologyManager -> ModelMultiOntology
+### Feature
+- Add Menu Item "Visualizations" to main frame which add visualization in tab panel
 ### Bug Fix
 - Fixed bug in build Maven which conflicted Eclipse
 - Fixed bug in thread prefuse visualization
+### Other
+- Edit *plugin.xml*, *viewconfig-mainTab.xml*, *MANIFEST.MF*
+- Remove Ant build and *MANIFEST.MF*. **Use Maven build** for build jar file: Protege plugin and runnable if frame.
+- Add logback.xml to resource
  

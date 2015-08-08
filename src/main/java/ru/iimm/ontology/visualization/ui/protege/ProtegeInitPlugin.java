@@ -16,8 +16,18 @@ import org.semanticweb.owlapi.model.OWLClass;
 
 import ru.iimm.ontology.visualization.lang.Language;
 import ru.iimm.ontology.visualization.lang.LanguageRU;
-import ru.iimm.ontology.visualization.tools.OntologyManager;
-import ru.iimm.ontology.visualization.ui.ContentView;
+import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelCFrameOntologyImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelMultiOntologyImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterCFrameCajunVisitorImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterCFrameGSVisitorImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterCFramePrefuseVisitorImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.RedirectingPresenterCFrameTreeNode;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisCajunImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisGSImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisPrefuseImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeImpl;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeWithVis;
+import ru.iimm.ontology.visualization.ui.mvp.models.ModelMultiOntology;
 
 
 
@@ -28,9 +38,8 @@ import ru.iimm.ontology.visualization.ui.ContentView;
  */
 public class ProtegeInitPlugin extends AbstractOWLClassViewComponent
 {
-	
-	private static final long serialVersionUID = 1L;
-	
+
+	private static final long serialVersionUID = 2666595749891729845L;
 	private Language lang;
 	
 	@Override
@@ -71,32 +80,70 @@ public class ProtegeInitPlugin extends AbstractOWLClassViewComponent
 						butSelect.setEnabled(false);
 						comboBox.setEnabled(false);
 						butSelect.setText(Language.LABEL_LOADING);
+						
+						ModelMultiOntology ontMng = new ModelMultiOntologyImpl(getOWLEditorKit(), true, true, true);
+						
+						//Presenter который перенаправляет event из TreeNode в  визуализации
+						RedirectingPresenterCFrameTreeNode redPresenter = new RedirectingPresenterCFrameTreeNode();
+						redPresenter.setModel(new ModelCFrameOntologyImpl(ontMng.getCongitiveFrameOntology()));
+						
+						//Дерево с фреймами
+						ViewTreeNodeImpl viewTreeNodeCFrame = new ViewTreeNodeImpl();
+						redPresenter.setView(viewTreeNodeCFrame);
+						viewTreeNodeCFrame.setPresenter(redPresenter);
+						
+						
+						
+						//Presenter и view визуализаций
+						PresenterCFrameCajunVisitorImpl presCajun = new PresenterCFrameCajunVisitorImpl();
+						ViewCFrameVisCajunImpl viewCajunCF = new ViewCFrameVisCajunImpl();
+						presCajun.setModel(redPresenter.getModel());
+						presCajun.setView(viewCajunCF);
+						viewCajunCF.setPresenter(presCajun);
+						redPresenter.addVisualMethod(presCajun);				
+											
+							
 
-						OntologyManager ontMng = new OntologyManager(getOWLEditorKit(), true, true, true);
+						PresenterCFramePrefuseVisitorImpl presPref = new PresenterCFramePrefuseVisitorImpl();
+						ViewCFrameVisPrefuseImpl viewPref = new ViewCFrameVisPrefuseImpl();
+						presPref.setModel(redPresenter.getModel());
+						presPref.setView(viewPref);
+						viewPref.setPresenter(presPref);
+						redPresenter.addVisualMethod(presPref);
+							
+	
+						PresenterCFrameGSVisitorImpl presGS = new PresenterCFrameGSVisitorImpl();			
+						ViewCFrameVisGSImpl viewGSCF = new ViewCFrameVisGSImpl();
+						presGS.setModel(redPresenter.getModel());
+						presGS.setView(viewGSCF);
+						viewGSCF.setPresenter(presGS);
+						redPresenter.addVisualMethod(presGS);
+
+									
+
+						
+						//Все добавляем в контейнер
+						ViewTreeNodeWithVis multiView = new ViewTreeNodeWithVis();
+						multiView.addTreeNode(viewTreeNodeCFrame.getViewComponent(), "Tree CFrames");
+						multiView.addVisualization(viewGSCF, presGS.getNameVisualMethod());
+						multiView.addVisualization(viewPref, presPref.getNameVisualMethod());
+						multiView.addVisualization(viewCajunCF, presCajun.getNameVisualMethod());
+						
+						mainPanel.removeAll();
+						mainPanel.add(multiView.getViewComponent(), BorderLayout.CENTER);
+						mainPanel.updateUI();
 						
 						switch(comboBox.getSelectedIndex())
 						{
-							case 0 : {
-								ContentView ontologyView = new ContentView(ontMng.getCongitiveFrameOntology(), ontMng.getProtegeOWLEditor());
-								
-								mainPanel.removeAll();
-								mainPanel.add(ontologyView.getContentView(), BorderLayout.CENTER);
-								mainPanel.updateUI();
-								break;
-							}
-							case 1 : {
+							case 0 : break;
+							case 1 : 
+							{
 								lang = new LanguageRU();
 								lang.initializeLang();
-								
-								ContentView ontologyView = new ContentView(ontMng.getCongitiveFrameOntology(), ontMng.getProtegeOWLEditor());
-								
-								mainPanel.removeAll();
-								mainPanel.add(ontologyView.getContentView(), BorderLayout.CENTER);
-								mainPanel.updateUI();
 								break;
-								}
-						}
-							
+							}
+							default : break;
+						}	
 					}
 				});
 				
@@ -106,10 +153,6 @@ public class ProtegeInitPlugin extends AbstractOWLClassViewComponent
 		});
 		
 		JPanel cont = new JPanel(new FlowLayout());
-		//cont.setLayout(new BoxLayout(cont, BoxLayout.X_AXIS));
-		//cont.setPreferredSize(new Dimension(300, 300));
-		//cont.setMaximumSize(new Dimension(300, 300));
-		//cont.setMinimumSize(new Dimension(300, 300));
 		
 		cont.add(setLang);
 		cont.add(comboBox);
