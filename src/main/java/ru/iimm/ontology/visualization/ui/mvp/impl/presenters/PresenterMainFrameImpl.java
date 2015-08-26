@@ -6,10 +6,12 @@ import java.io.File;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.filechooser.FileFilter;
 
 import ru.iimm.ontology.visualization.lang.Language;
+import ru.iimm.ontology.visualization.ui.ConsoleSwing;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelCFrameOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelMultiOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelOwlOntologyImpl;
@@ -33,6 +35,22 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 {
 	private ViewMainFrame view;
 	private ModelMultiOntology model;
+	
+	private ConsoleSwing console;
+	private JFrame consoleFrame;
+	
+	/**
+	 * {@linkplain PresenterMainFrameImpl}
+	 */
+	public PresenterMainFrameImpl()
+	{
+		this.console = new ConsoleSwing();
+		
+		this.consoleFrame = new JFrame("Console");
+		this.consoleFrame.setSize(600, 600);
+		this.consoleFrame.setLocationRelativeTo(null);
+		this.consoleFrame.getContentPane().add(console.getConsole());
+	}
 	
 	@Override
 	public void loadOntologyFromFileChooser()
@@ -145,8 +163,8 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 
 		JMenu visItem = this.view.getMenuItemVisualization();
 		
-		JMenu visCFrame = new JMenu("CFrame");
-		JMenu visOWLClass = new JMenu("OWLClass");
+		JMenu visCFrame = new JMenu(Language.COGNITIVE_FRAME);
+		JMenu visOWLClass = new JMenu(Language.LABEL_FILE_OWL_ONTOLOGY);
 		
 		final JCheckBoxMenuItem visCajunCFrame = new JCheckBoxMenuItem("Cajun");		
 		final JCheckBoxMenuItem visPrefuseCFrame = new JCheckBoxMenuItem("Prefuse");	
@@ -160,8 +178,8 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		
 		visOWLClass.add(visPrefuseOWLClass);
 		
-		visItem.add(visCFrame);
-		visItem.add(visOWLClass);
+		visItem.add(visCFrame,0);
+		visItem.add(visOWLClass,1);
 		
 		//Presenter который перенаправляет event из TreeNode в  визуализации
 		final RedirectingPresenterCFrameTreeNode redPresenter = new RedirectingPresenterCFrameTreeNode();
@@ -300,6 +318,36 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		});
 		
 		view.setContentPane(multiView.getViewComponent());
+	}
+
+	@Override
+	public void closeApplication()
+	{
+		System.exit(0);
+	}
+
+	@Override
+	public void showConsole()
+	{
+		
+		if(this.consoleFrame.isVisible())
+		{
+			this.consoleFrame.toFront();
+			this.consoleFrame.repaint();
+		}	
+		else
+		{
+			new Thread(new Runnable()
+			{
+				
+				@Override
+				public void run()
+				{
+					consoleFrame.setVisible(true);
+				}
+			}).start();
+			
+		}
 	}
 }
 

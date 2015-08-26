@@ -22,4 +22,8 @@ public interface PresenterMainFrame extends PresenterFrame
 	void initVisualization();
 	/**Открыть окно с настройками.*/
 	void showSettingFrame();
+	/**Закрыть приложение.*/
+	void closeApplication();
+	/**Открыть консоль.*/
+	void showConsole();
 }

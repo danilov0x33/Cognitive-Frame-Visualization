@@ -1,5 +1,7 @@
 package ru.iimm.ontology.visualization.lang;
 
+import javax.swing.Icon;
+
 import ru.iimm.ontology.OWL2UPOConverter.ConstantsOntConverter;
 
 /**
@@ -9,15 +11,19 @@ import ru.iimm.ontology.OWL2UPOConverter.ConstantsOntConverter;
  */
 public abstract class Language
 {
+	
 	/**Инициализация языка.*/
 	public abstract void initializeLang();
+	
 	public static String NAME_INIT_LANG = "Default";
 	//=====================MENU BAR========================
 	public static String MENU_FILE = "File";
 	public static String MENU_ITEM_EXIT = "Exit";
 	public static String MENU_ITEM_LOAD_ONT = "Load Ontology...";
 	public static String MENU_ITEM_SETTING = "Setting";
+	public static String MENU_ITEM_WINDOW = "Window";
 	public static String MENU_ITEM_VISUALIZATIONS = "Visualizations";
+	public static String MENU_ITEM_CONSOLE = "Console";
 	//=====================BUTTONS=========================
 	public static String BUTTON_SETTING_ONTOLOGY = "Setting Ontology";
 	public static String BUTTON_SETTING_VIS = "Setting Visualization";

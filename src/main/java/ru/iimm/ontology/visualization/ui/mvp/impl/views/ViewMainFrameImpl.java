@@ -27,7 +27,7 @@ public class ViewMainFrameImpl implements ViewMainFrame
     private JPanel contentPanel;
     private JFrame mainFrame;
 	private JMenuItem menuItemLoadOntology;
-	private JMenu menuItemVisualizations;
+	private JMenu menuItemWindow;
     
     /**
      * {@linkplain ViewMainFrameImpl}
@@ -55,7 +55,26 @@ public class ViewMainFrameImpl implements ViewMainFrame
     	this.menuItemLoadOntology = new JMenuItem(Language.MENU_ITEM_LOAD_ONT);
     	JMenuItem menuItemSetting = new JMenuItem(Language.MENU_ITEM_SETTING);
     	
-    	this.menuItemVisualizations = new JMenu(Language.MENU_ITEM_VISUALIZATIONS);
+    	this.menuItemWindow = new JMenu(Language.MENU_ITEM_WINDOW);
+    	
+    	JMenuItem menuItemConsole = new JMenuItem(Language.MENU_ITEM_CONSOLE);
+    	menuItemConsole.addActionListener(new ActionListener()
+		{		
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				presenter.showConsole();
+			}
+		});
+    	
+    	menuItemExit.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				presenter.closeApplication();
+			}
+		});
     	
     	this.menuItemLoadOntology.addActionListener(new ActionListener() 
     	{	
@@ -73,6 +92,9 @@ public class ViewMainFrameImpl implements ViewMainFrame
 			}
 		});
     	
+    	this.menuItemWindow.add(new JSeparator());
+    	this.menuItemWindow.add(menuItemConsole);
+    	
     	menuFile.add(this.menuItemLoadOntology);
     	menuFile.add(new JSeparator());
     	menuFile.add(menuItemSetting);
@@ -80,7 +102,7 @@ public class ViewMainFrameImpl implements ViewMainFrame
     	menuFile.add(menuItemExit);
     	
     	menuBar.add(menuFile);
-    	menuBar.add(this.menuItemVisualizations);
+    	menuBar.add(this.menuItemWindow);
     	
     	this.mainFrame.setJMenuBar(menuBar);
     	this.mainFrame.getContentPane().add(this.contentPanel, BorderLayout.CENTER);
@@ -128,6 +150,6 @@ public class ViewMainFrameImpl implements ViewMainFrame
 	@Override
 	public JMenu getMenuItemVisualization()
 	{
-		return this.menuItemVisualizations;
+		return this.menuItemWindow;
 	}
 }

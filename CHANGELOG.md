@@ -28,6 +28,7 @@
 - Rename OntologyManager -> ModelMultiOntology
 ### Feature
 - Add Menu Item "Visualizations" to main frame which add visualization in tab panel
+- Add console in main frame
 ### Bug Fix
 - Fixed bug in build Maven which conflicted Eclipse
 - Fixed bug in thread prefuse visualization
