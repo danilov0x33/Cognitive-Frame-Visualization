@@ -4,9 +4,11 @@
 package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLLogicalAxiom;
 
@@ -109,6 +111,10 @@ public class SplitAxiom extends AbstractAxiom
 	{
 	    return (!this.leftOWLclassExpression.isAnonymous() && !this.rightOWLclassExpression.isAnonymous());
 	}
+
+
+
+
 
 
 }

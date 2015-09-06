@@ -246,5 +246,12 @@ public abstract class AbstractAxiom implements Cloneable, OWLLogicalAxiom
 		return this.originalAxiom.compareTo(arg0);
 
 	}
+	
+	@Override
+	public Set<OWLAnonymousIndividual> getAnonymousIndividuals()
+	{
+	    return this.originalAxiom.getAnonymousIndividuals();
+	}
+
 
 }

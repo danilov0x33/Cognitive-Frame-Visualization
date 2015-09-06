@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.semanticweb.owlapi.model.ClassExpressionType;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLAnonymousIndividual;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -596,5 +597,6 @@ public class ComplexSubAxiom extends SubAxiom
 		}
 		return fragment;
 	}
+
 
 }

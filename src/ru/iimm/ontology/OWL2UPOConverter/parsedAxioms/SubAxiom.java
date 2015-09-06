@@ -358,4 +358,12 @@ public abstract class SubAxiom implements OWLClassExpression
 	abstract public OWLNamedIndividual addRelatedSubAxiom(
 			OWLNamedIndividual mainSubaxInd, IRI relationIRI, UserPresenOnt upo);
 
+	@Override
+	public Set<OWLAnonymousIndividual> getAnonymousIndividuals()
+	{
+	    return this.subAxOWL.getAnonymousIndividuals();
+	}
+	
+	
+	
 }
