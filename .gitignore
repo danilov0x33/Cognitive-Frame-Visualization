@@ -1,34 +1,5 @@
-# Ignore all diles/dirs ...
-*
-
-#... But some are included =======
-#== DIRs =========================
-!resources
-!resources/*
-!resources/*/*
-!resources/*/*/*
-!resources/*/*/*/*
-!resources/*/*/*/*/*
-!resources/*/*/*/*/*/*
-!resources/*/*/*/*/*/*/*
-
-
-!src/
-!src/*
-!src/*/*
-!src/*/*/*
-!src/*/*/*/*
-!src/*/*/*/*/*
-!src/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*/*/*/*/*
-!src/*/*/*/*/*/*/*/*/*/*/*/*
-
-#== Files ========================
-!changes.txt
-!readme.txt
+/*
+!/pom.xml
+!/src
+!*.md
 !.gitignore
-!pom.xml

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<configuration scan="true"> 
+<!-- <configuration  debug="true">  -->    
+
+  <!-- ===================================================
+   Указываем аппендеры - куда добавлять лог-сообщения ====
+   ==================================================== -->
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+  <!-- Шаблон лог-сообщений -->
+    <encoder>
+      <pattern>%d{HH:mm:ss} %-5level %logger{5}.%method - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- Аппендер для записи в файл -->
+ <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+	<param name="Append" value="false" />
+	<file>cftools.log</file>
+
+	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+    	<pattern>
+    	    %d{HH:mm:ss}  %-5level %logger{36}.%method - %msg%n
+    	</pattern>
+  	</encoder>	    
+ </appender>
+ 
+  <!-- ====================================================== 
+  ===========================================================-->  
+
+
+ <!-- ===================================================
+   Указываем логеры =========================================
+   ==================================================== -->
+  <!-- Уровень лога для конкретного класса -->
+  <logger name="ru.iimm.ontology.cftools" level="INFO" additivity="false">
+  	<!-- Добавляем аппендеры  -->
+		<appender-ref ref="STDOUT" />
+   		<appender-ref ref="FILE" />
+
+  </logger>
+
+
+  <logger name="ru.iimm.ontology.cftools.CFrameOnt" level="INFO" additivity="false">
+  	<!-- Добавляем аппендеры  -->
+		<appender-ref ref="STDOUT" />
+   		<appender-ref ref="FILE" />
+
+  </logger>
+
+<!-- Уровень лога ОБЩИЙ - переопределяет уровень для классов -->
+  <root level="INFO">
+	<!-- Добавляем аппендеры  -->                
+		<appender-ref ref="STDOUT" />
+                <appender-ref ref="FILE" />
+  </root>  
+  
+</configuration>
+
+<!-- log levels TRACE DEBUG INFO WARN ERROR FATAL OFF -->
+
