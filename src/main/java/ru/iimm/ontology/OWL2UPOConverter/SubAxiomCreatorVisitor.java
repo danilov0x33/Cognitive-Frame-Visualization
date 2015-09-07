@@ -26,6 +26,9 @@ import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.DataFactory;
+import ru.iimm.ontology.OWL2UPOConverter.parsedAxioms.SubAxiom;
+
 /**
  * Визитор, возвращающий субаксиому из посещаемого выражения.
  * Он инициирует вызов необходимого фабричного метода. 

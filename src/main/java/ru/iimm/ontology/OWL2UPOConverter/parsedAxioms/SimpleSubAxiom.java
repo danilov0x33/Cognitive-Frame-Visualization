@@ -1,4 +1,4 @@
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 import java.util.ArrayList;
 
 import org.semanticweb.owlapi.model.IRI;
@@ -8,6 +8,9 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.iimm.ontology.OWL2UPOConverter.ConstantsOntConverter;
+import ru.iimm.ontology.OWL2UPOConverter.UPOont;
+import ru.iimm.ontology.OWL2UPOConverter.UserPresenOnt;
 import ru.iimm.ontology.ontAPI.Ontology;
 
 /**

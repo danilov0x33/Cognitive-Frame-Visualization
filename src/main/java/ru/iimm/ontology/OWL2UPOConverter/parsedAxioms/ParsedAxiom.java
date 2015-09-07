@@ -1,28 +1,13 @@
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-
-
-
-
-
-import org.semanticweb.owlapi.model.AxiomType;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
-import org.semanticweb.owlapi.model.OWLLogicalAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLNaryClassAxiom;
-import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ru.iimm.ontology.OWL2UPOConverter.UserPresenOnt;
 import ru.iimm.ontology.ontAPI.ConstantsOntAPI;
-import ru.iimm.ontology.ontAPI.Ontology;
 
 //import com.clarkparsia.owlapiv3.OWL;
 

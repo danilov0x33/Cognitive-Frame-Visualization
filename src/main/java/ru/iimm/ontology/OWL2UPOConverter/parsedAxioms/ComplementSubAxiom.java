@@ -1,13 +1,15 @@
 /**
  * 
  */
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 
 import java.util.ArrayList;
 
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+
+import ru.iimm.ontology.OWL2UPOConverter.ConstantsOntConverter;
 
 /**
  * @author Lomov P. A.

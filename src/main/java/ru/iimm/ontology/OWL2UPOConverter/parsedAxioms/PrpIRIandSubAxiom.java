@@ -1,4 +1,4 @@
-package ru.iimm.ontology.OWL2UPOConverter;
+package ru.iimm.ontology.OWL2UPOConverter.parsedAxioms;
 import org.semanticweb.owlapi.model.IRI;
 
 	/**

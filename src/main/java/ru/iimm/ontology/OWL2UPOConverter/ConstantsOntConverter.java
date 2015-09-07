@@ -72,7 +72,14 @@ public interface ConstantsOntConverter extends ConstantsOntAPI
 	/**
 	 * Разделитель в названии сложной субаксиомы.
 	 */
-	final static String UPO_TITLE_DELIMITER = "-";
+	final static String UPO_TITLE_DELIMITER = "--";
+
+	/**
+	 * Разделитель в названии сложной субаксиомы.
+	 */
+	final static String UPO_PROP_VAL_DELIMITER = "=>";
+
+
 	
 	/**
 	 * Идентификатор англ. языка
