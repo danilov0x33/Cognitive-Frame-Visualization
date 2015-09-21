@@ -6,21 +6,14 @@ import java.io.File;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.filechooser.FileFilter;
 
 import ru.iimm.ontology.visualization.lang.Language;
-import ru.iimm.ontology.visualization.ui.ConsoleSwing;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelCFrameOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelMultiOntologyImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.models.ModelOwlOntologyImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisCajunImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisGSImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisPrefuseImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewOWLClassPrefuseImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewSettingFrameImpl;
-import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeImpl;
 import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeWithVis;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelMultiOntology;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterMainFrame;
@@ -29,27 +22,19 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewMainFrame;
 /**
  * Реализация интерфейса {@linkplain PresenterMainFrame}
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class PresenterMainFrameImpl implements PresenterMainFrame
 {
 	private ViewMainFrame view;
 	private ModelMultiOntology model;
 	
-	private ConsoleSwing console;
-	private JFrame consoleFrame;
-	
 	/**
 	 * {@linkplain PresenterMainFrameImpl}
 	 */
 	public PresenterMainFrameImpl()
 	{
-		this.console = new ConsoleSwing();
-		
-		this.consoleFrame = new JFrame("Console");
-		this.consoleFrame.setSize(600, 600);
-		this.consoleFrame.setLocationRelativeTo(null);
-		this.consoleFrame.getContentPane().add(console.getConsole());
+
 	}
 	
 	@Override
@@ -184,135 +169,101 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 		//Presenter который перенаправляет event из TreeNode в  визуализации
 		final RedirectingPresenterCFrameTreeNode redPresenter = new RedirectingPresenterCFrameTreeNode();
 		redPresenter.setModel(new ModelCFrameOntologyImpl(this.model.getCongitiveFrameOntology()));
-		//Дерево с фреймами
-		ViewTreeNodeImpl viewTreeNodeCFrame = new ViewTreeNodeImpl();
-		redPresenter.setView(viewTreeNodeCFrame);
-		viewTreeNodeCFrame.setPresenter(redPresenter);
+		
 		//Дерево с иерархией OWLClass'ов
 		final PresenterOwlClassPrefuseImpl presenterOwlPref = new PresenterOwlClassPrefuseImpl();		
 		presenterOwlPref.setModel(new ModelOwlOntologyImpl(model.getOWLOnt().mng ,model.getOWLOnt().ontInMem, model.getOWLOnt().reas));
-		
-		final ViewTreeNodeImpl viewTreeNodeOwl = new ViewTreeNodeImpl();
-		
+
 		final RedirectingPresenterOwlClassTreeNode redPresOnt = new RedirectingPresenterOwlClassTreeNode(presenterOwlPref);
 		redPresOnt.setModel(presenterOwlPref.getModel());
-		redPresOnt.setView(viewTreeNodeOwl);
-
-		viewTreeNodeOwl.setPresenter(redPresOnt);
-		
-		
+	
 		//Presenter и view визуализаций
 		
 		
 		//Все добавляем в контейнер
 		final ViewTreeNodeWithVis multiView = new ViewTreeNodeWithVis();
-		multiView.addTreeNode(viewTreeNodeCFrame.getViewComponent(), "Tree CFrames");
-		multiView.addTreeNode(viewTreeNodeOwl.getViewComponent(), "Ontology tree");		
+		multiView.addTreeNode(redPresenter.getView().getViewComponent(), "Tree CFrames");
+		multiView.addTreeNode(redPresOnt.getView().getViewComponent(), "Ontology tree");		
 		
 		visCajunCFrame.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				PresenterCFrameCajunVisitorImpl presCajun = new PresenterCFrameCajunVisitorImpl();
-				ViewCFrameVisCajunImpl viewCajunCF = new ViewCFrameVisCajunImpl();
-				
+				PresenterCFrameCajunVisitorImpl presCajun = new PresenterCFrameCajunVisitorImpl();				
 				presCajun.setModel(redPresenter.getModel());
-				presCajun.setView(viewCajunCF);
-				
+		
 				if(visCajunCFrame.isSelected())
-				{					
-					viewCajunCF.setPresenter(presCajun);
-					
+				{
 					redPresenter.addVisualMethod(presCajun);
 					
-					multiView.addVisualization(viewCajunCF, presCajun.getNameVisualMethod());
+					multiView.addVisualization(presCajun.getView(), presCajun.getNameVisualMethod());
 				}
 				else
 				{
 					redPresenter.removeVisualMethod(presCajun);
-					multiView.removeVisualization(viewCajunCF, presCajun.getNameVisualMethod());
+					multiView.removeVisualization(presCajun.getView(), presCajun.getNameVisualMethod());
 				}
 			}
 		});
 		
 		visPrefuseCFrame.addActionListener(new ActionListener()
-		{
-			
+		{	
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				PresenterCFramePrefuseVisitorImpl presPref = new PresenterCFramePrefuseVisitorImpl();
-				ViewCFrameVisPrefuseImpl viewPref = new ViewCFrameVisPrefuseImpl();
-				
 				presPref.setModel(redPresenter.getModel());
-				presPref.setView(viewPref);
 				
 				if(visPrefuseCFrame.isSelected())
-				{					
-					viewPref.setPresenter(presPref);
-					
+				{
 					redPresenter.addVisualMethod(presPref);
 					
-					multiView.addVisualization(viewPref, presPref.getNameVisualMethod());
+					multiView.addVisualization(presPref.getView(), presPref.getNameVisualMethod());
 				}
 				else
 				{
 					redPresenter.removeVisualMethod(presPref);
-					multiView.removeVisualization(viewPref,presPref.getNameVisualMethod());
+					multiView.removeVisualization(presPref.getView(),presPref.getNameVisualMethod());
 				}
 			}
 		});
 		
 		visGraphStreamCFrame.addActionListener(new ActionListener()
 		{
-			
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{				
-				PresenterCFrameGSVisitorImpl presGS = new PresenterCFrameGSVisitorImpl();			
-				ViewCFrameVisGSImpl viewGSCF = new ViewCFrameVisGSImpl();
-				
+				PresenterCFrameGSVisitorImpl presGS = new PresenterCFrameGSVisitorImpl();
 				presGS.setModel(redPresenter.getModel());
-				presGS.setView(viewGSCF);
-				
+
 				if(visGraphStreamCFrame.isSelected())
-				{					
-					viewGSCF.setPresenter(presGS);
+				{
 					
 					redPresenter.addVisualMethod(presGS);
 
-					multiView.addVisualization(viewGSCF, presGS.getNameVisualMethod());
+					multiView.addVisualization(presGS.getView(), presGS.getNameVisualMethod());
 				}
 				else
 				{
 					redPresenter.removeVisualMethod(presGS);
-					multiView.removeVisualization(viewGSCF, presGS.getNameVisualMethod());
+					multiView.removeVisualization(presGS.getView(), presGS.getNameVisualMethod());
 				}
 			}
 		});
 		
 		visPrefuseOWLClass.addActionListener(new ActionListener()
 		{
-			
 			@Override
 			public void actionPerformed(ActionEvent e)
-			{	
-				ViewOWLClassPrefuseImpl viewOwlPrefuse = new ViewOWLClassPrefuseImpl();
-			
-				presenterOwlPref.setView(viewOwlPrefuse);
-				
+			{
 				if(visPrefuseOWLClass.isSelected())
 				{					
-					viewOwlPrefuse.setPresenter(presenterOwlPref);
-					
-					redPresOnt.setView(viewTreeNodeOwl);
-					
-					multiView.addVisualization(viewOwlPrefuse, "Prefuse - Ontology");
+					multiView.addVisualization(presenterOwlPref.getView(), "Prefuse - Ontology");
 				}
 				else
 				{
-					multiView.removeVisualization(viewOwlPrefuse, "Prefuse - Ontology");
+					multiView.removeVisualization(presenterOwlPref.getView(), "Prefuse - Ontology");
 				}
 			}
 		});
@@ -324,30 +275,6 @@ public class PresenterMainFrameImpl implements PresenterMainFrame
 	public void closeApplication()
 	{
 		System.exit(0);
-	}
-
-	@Override
-	public void showConsole()
-	{
-		
-		if(this.consoleFrame.isVisible())
-		{
-			this.consoleFrame.toFront();
-			this.consoleFrame.repaint();
-		}	
-		else
-		{
-			new Thread(new Runnable()
-			{
-				
-				@Override
-				public void run()
-				{
-					consoleFrame.setVisible(true);
-				}
-			}).start();
-			
-		}
 	}
 }
 

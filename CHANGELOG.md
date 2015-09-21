@@ -36,4 +36,13 @@
 - Edit *plugin.xml*, *viewconfig-mainTab.xml*, *MANIFEST.MF*
 - Remove Ant build and *MANIFEST.MF*. **Use Maven build** for build jar file: Protege plugin and runnable if frame.
 - Add logback.xml to resource
- 
+
+## 1.2 (2015-09-21)
+### API Changes
+- Auto create and add view constructors in presenter's
+### Bug Fix
+- Remove UI console
+### Feature
+- Add visualuzation for [Ontology disign patterns](http://ontologydesignpatterns.org/):
+  - Content disign pattern: 
+     - Situation

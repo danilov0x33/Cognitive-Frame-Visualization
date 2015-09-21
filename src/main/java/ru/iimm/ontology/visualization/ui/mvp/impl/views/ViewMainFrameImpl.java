@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -57,16 +58,6 @@ public class ViewMainFrameImpl implements ViewMainFrame
     	
     	this.menuItemWindow = new JMenu(Language.MENU_ITEM_WINDOW);
     	
-    	JMenuItem menuItemConsole = new JMenuItem(Language.MENU_ITEM_CONSOLE);
-    	menuItemConsole.addActionListener(new ActionListener()
-		{		
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				presenter.showConsole();
-			}
-		});
-    	
     	menuItemExit.addActionListener(new ActionListener()
 		{
 			@Override
@@ -93,7 +84,6 @@ public class ViewMainFrameImpl implements ViewMainFrame
 		});
     	
     	this.menuItemWindow.add(new JSeparator());
-    	this.menuItemWindow.add(menuItemConsole);
     	
     	menuFile.add(this.menuItemLoadOntology);
     	menuFile.add(new JSeparator());

@@ -8,11 +8,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import ru.iimm.ontology.visualization.tools.CFrameDecorator;
 import ru.iimm.ontology.visualization.tools.VisualMethodVisitorInt;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeImpl;
 
 /**
  * Presenter - перенаправляющий event'ы из TreeNode в presenter'ы визуализаций.
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class RedirectingPresenterCFrameTreeNode extends PresenterCFrameTreeNodeImpl
 {
@@ -25,6 +26,10 @@ public class RedirectingPresenterCFrameTreeNode extends PresenterCFrameTreeNodeI
 	public RedirectingPresenterCFrameTreeNode()
 	{
 		this.visList = new ArrayList<VisualMethodVisitorInt>();
+		//Дерево с фреймами
+		ViewTreeNodeImpl viewTreeNodeCFrame = new ViewTreeNodeImpl();
+		this.setView(viewTreeNodeCFrame);
+		viewTreeNodeCFrame.setPresenter(this);
 	}
 	
 	@Override

@@ -6,12 +6,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.semanticweb.owlapi.model.OWLClass;
 
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewTreeNodeImpl;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterOwlClassPrefuse;
 
 /**
  * Перенаправление event'ов из дерева с OWLClass'ами в {@linkplain PresenterOwlClassPrefuse}.
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class RedirectingPresenterOwlClassTreeNode extends PresenterOwlClassTreeNodeImpl
 {
@@ -23,6 +24,10 @@ public class RedirectingPresenterOwlClassTreeNode extends PresenterOwlClassTreeN
 	public RedirectingPresenterOwlClassTreeNode(PresenterOwlClassPrefuse presenter)
 	{
 		this.presenter = presenter;
+		
+		ViewTreeNodeImpl viewTreeNodeOwl = new ViewTreeNodeImpl();
+		this.setView(viewTreeNodeOwl);
+		viewTreeNodeOwl.setPresenter(this);
 	}
 	
 	@Override

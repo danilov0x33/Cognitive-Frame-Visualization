@@ -10,6 +10,7 @@ import ru.iimm.ontology.cftools.PartonomyCFrame;
 import ru.iimm.ontology.cftools.SpecialCFrame;
 import ru.iimm.ontology.cftools.TaxonomyCFrame;
 import ru.iimm.ontology.visualization.tools.cajun.DefaultGraphModelCajun;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisCajunImpl;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelCFrameOntology;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameCajunVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisCajun;
@@ -17,7 +18,7 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisCajun;
 /**
  * Реализация интерфейса {@linkplain PresenterCFrameCajunVisitor}.
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class PresenterCFrameCajunVisitorImpl implements PresenterCFrameCajunVisitor
 {
@@ -27,6 +28,16 @@ public class PresenterCFrameCajunVisitorImpl implements PresenterCFrameCajunVisi
 	private ModelCFrameOntology model;
 	/**Визуальный компонент.*/
 	private ViewVisCajun view;
+	
+	/**
+	 * {@linkplain PresenterCFrameCajunVisitorImpl}
+	 */
+	public PresenterCFrameCajunVisitorImpl()
+	{
+		ViewCFrameVisCajunImpl viewCajunCF = new ViewCFrameVisCajunImpl();
+		viewCajunCF.setPresenter(this);
+		this.view = viewCajunCF;	
+	}
 	
 	@Override
 	public void setModel(ModelCFrameOntology model)

@@ -11,6 +11,7 @@ import prefuse.data.tuple.TupleSet;
 import prefuse.visual.VisualItem;
 import ru.iimm.ontology.visualization.tools.prefuse.tools.ConstantsPrefuse;
 import ru.iimm.ontology.visualization.tools.prefuse.tools.DefaultGraphPrefuse;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewOWLClassPrefuseImpl;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelOwlOntology;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterOwlClassPrefuse;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisPrefuse;
@@ -18,12 +19,22 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisPrefuse;
 /**
  * Реализация интерфейса {@linkplain PresenterOwlClassPrefuse}
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class PresenterOwlClassPrefuseImpl implements PresenterOwlClassPrefuse
 {
 	private ModelOwlOntology model;
 	private ViewVisPrefuse view;
+	
+	/**
+	 * {@linkplain PresenterOwlClassPrefuseImpl}
+	 */
+	public PresenterOwlClassPrefuseImpl()
+	{
+		ViewOWLClassPrefuseImpl viewOwlPrefuse = new ViewOWLClassPrefuseImpl();
+		viewOwlPrefuse.setPresenter(this);
+		this.view = viewOwlPrefuse;
+	}
 	
 	@Override
 	public void setModel(ModelOwlOntology model)

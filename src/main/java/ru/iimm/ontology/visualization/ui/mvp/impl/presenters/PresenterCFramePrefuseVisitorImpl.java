@@ -11,6 +11,7 @@ import ru.iimm.ontology.cftools.SpecialCFrame;
 import ru.iimm.ontology.cftools.TaxonomyCFrame;
 import ru.iimm.ontology.visualization.tools.prefuse.tools.ConstantsPrefuse;
 import ru.iimm.ontology.visualization.tools.prefuse.tools.DefaultGraphPrefuse;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisPrefuseImpl;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelCFrameOntology;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFramePrefuseVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisPrefuse;
@@ -18,7 +19,7 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisPrefuse;
 /**
  * Реализация интерфейса {@linkplain PresenterCFramePrefuseVisitor}.
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class PresenterCFramePrefuseVisitorImpl implements PresenterCFramePrefuseVisitor
 {
@@ -28,6 +29,16 @@ public class PresenterCFramePrefuseVisitorImpl implements PresenterCFramePrefuse
 	private ModelCFrameOntology model;
 	/**Визуальный компонент.*/
 	private ViewVisPrefuse view;
+	
+	/**
+	 * {@linkplain PresenterCFramePrefuseVisitorImpl}
+	 */
+	public PresenterCFramePrefuseVisitorImpl()
+	{
+		ViewCFrameVisPrefuseImpl viewPref = new ViewCFrameVisPrefuseImpl();
+		viewPref.setPresenter(this);
+		this.view = viewPref;
+	}
 	
 	@Override
 	public void setModel(ModelCFrameOntology model)

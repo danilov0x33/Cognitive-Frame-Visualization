@@ -11,6 +11,7 @@ import ru.iimm.ontology.cftools.DependencyCFrame;
 import ru.iimm.ontology.cftools.PartonomyCFrame;
 import ru.iimm.ontology.cftools.SpecialCFrame;
 import ru.iimm.ontology.cftools.TaxonomyCFrame;
+import ru.iimm.ontology.visualization.ui.mvp.impl.views.ViewCFrameVisGSImpl;
 import ru.iimm.ontology.visualization.ui.mvp.models.ModelCFrameOntology;
 import ru.iimm.ontology.visualization.ui.mvp.presenters.PresenterCFrameGSVisitor;
 import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisGS;
@@ -18,7 +19,7 @@ import ru.iimm.ontology.visualization.ui.mvp.views.ViewVisGS;
 /**
  * Реализация интерфейса {@linkplain PresenterCFrameGSVisitor}.
  * @author Danilov
- * @version 0.1
+ * @version 0.2
  */
 public class PresenterCFrameGSVisitorImpl implements PresenterCFrameGSVisitor
 {
@@ -28,6 +29,16 @@ public class PresenterCFrameGSVisitorImpl implements PresenterCFrameGSVisitor
 	private ModelCFrameOntology model;
 	/**Визуальный компонент.*/
 	private ViewVisGS view;
+	
+	/**
+	 * {@linkplain PresenterCFrameGSVisitorImpl}
+	 */
+	public PresenterCFrameGSVisitorImpl()
+	{
+		ViewCFrameVisGSImpl viewGSCF = new ViewCFrameVisGSImpl();
+		viewGSCF.setPresenter(this);
+		this.view = viewGSCF;
+	}
 	
 	@Override
 	public void setModel(ModelCFrameOntology model)
