@@ -1,6 +1,8 @@
 package ru.iimm.ontology.visualization.patterns;
 
 import java.awt.Color;
+
+import ru.iimm.ontology.visualization.patterns.elements.DottedLine;
 /**
  * Визуальный образ элемента.
  * @author Danilov
@@ -12,11 +14,14 @@ public abstract class ElementVis
 	protected String labelElement;
 	/**Цвет.*/
 	protected Color backgroudColor;
+	/**Пунктир.*/
+	protected DottedLine dottedLine;
 
 	public ElementVis()
 	{
 		this.labelElement = "unknow_elem";
 		this.backgroudColor = Color.WHITE;
+		this.dottedLine = DottedLine.SOLID;
 	}
 	
 	/**
@@ -49,5 +54,21 @@ public abstract class ElementVis
 	public void setLabelElement(String labelElement)
 	{
 		this.labelElement = labelElement;
+	}
+
+	/**
+	 * @return the {@linkplain #dottedLine}
+	 */
+	public DottedLine getDottedLine()
+	{
+		return dottedLine;
+	}
+
+	/**
+	 * @param dottedLine the {@linkplain #dottedLine} to set
+	 */
+	public void setDottedLine(DottedLine dottedLine)
+	{
+		this.dottedLine = dottedLine;
 	}	
 }

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 import org.semanticweb.owlapi.model.IRI;
@@ -65,11 +67,20 @@ public class TestPattern extends JFrame
 		DescriptionCDP description = new DescriptionCDP(patternOntDirPath);
 		DescriptionRealization.Builder builderDe = DescriptionRealization.newBuilder(description);
 		
-		PresenterPatternVisPiccolo2DVisitorImpl pPresenter = new PresenterPatternVisPiccolo2DVisitorImpl();
-		pPresenter.visit(builderSit.setEntity(object,rl2,object,rl2).setSituation(rl).buildVisualization());
-		pPresenter.visit(builderDe.setConcepts(object,rl2,object,rl2).setDescription(rl).buildVisualization());
-		pPresenter.getView().open();
-		this.getContentPane().add(pPresenter.getView().getViewComponent());
+		PresenterPatternVisPiccolo2DVisitorImpl pPresenterSit = new PresenterPatternVisPiccolo2DVisitorImpl();
+		pPresenterSit.getView().open();
+		
+		PresenterPatternVisPiccolo2DVisitorImpl pPresenterDes= new PresenterPatternVisPiccolo2DVisitorImpl();
+		pPresenterDes.getView().open();
+		
+		pPresenterSit.visit(builderSit.setEntity(object,rl2,object,rl2).setSituation(rl).buildVisualization());
+		pPresenterDes.visit(builderDe.setConcepts(object,rl2,object,rl2).setDescription(rl).buildVisualization());
+		
+		JSplitPane splitPanel = new JSplitPane();
+		splitPanel.setLeftComponent(pPresenterSit.getView().getViewComponent());
+		splitPanel.setRightComponent(pPresenterDes.getView().getViewComponent());
+
+		this.getContentPane().add(splitPanel);
     }
 
     public static void main(final String[] args) throws InvocationTargetException, InterruptedException 

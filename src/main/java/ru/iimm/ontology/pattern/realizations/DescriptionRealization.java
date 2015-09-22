@@ -1,5 +1,6 @@
 package ru.iimm.ontology.pattern.realizations;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
@@ -14,6 +15,7 @@ import ru.iimm.ontology.pattern.ODPRealization;
 import ru.iimm.ontology.visualization.patterns.DescriptionRealizationVis;
 import ru.iimm.ontology.visualization.patterns.elements.ArrowElementVis;
 import ru.iimm.ontology.visualization.patterns.elements.DescriptionElementVis;
+import ru.iimm.ontology.visualization.patterns.elements.DottedLine;
 
 public class DescriptionRealization extends ODPRealization
 {
@@ -85,12 +87,19 @@ public class DescriptionRealization extends ODPRealization
 			
 			DescriptionRealizationVis desVis = new DescriptionRealizationVis(description.getDescription());
 			desVis.setLabelElement(description.getDescription().getIRI().getFragment());
-			desVis.setBinder(new ArrowElementVis(this.pattern.getDefines()));
+			desVis.setDottedLine(DottedLine.DASHED);
+			
+			ArrowElementVis arrow = new ArrowElementVis(this.pattern.getDefines());
+			arrow.setBackgroudColor(Color.WHITE);
+			arrow.setDottedLine(DottedLine.DASHED);
+			
+			desVis.setBinder(arrow);
 			
 			for(OWLClass concept : description.getConcept())
 			{
 				DescriptionElementVis visElem = new DescriptionElementVis(concept);
 				visElem.setLabelElement(concept.getIRI().getFragment());
+				visElem.setDottedLine(DottedLine.DASHED);
 				
 				desVis.addElement(visElem);
 			}

@@ -1,16 +1,19 @@
 package ru.iimm.ontology.visualization.tools.piccolo2d.patters;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Polygon;
 
 import org.piccolo2d.PNode;
 import org.piccolo2d.extras.swing.SwingLayoutNode;
 import org.piccolo2d.extras.swing.SwingLayoutNode.Anchor;
+import org.piccolo2d.extras.util.PFixedWidthStroke;
 import org.piccolo2d.nodes.PPath;
 import org.piccolo2d.nodes.PText;
 
 import ru.iimm.ontology.visualization.patterns.elements.ArrowElementVis;
 import ru.iimm.ontology.visualization.patterns.elements.DescriptionElementVis;
+import ru.iimm.ontology.visualization.patterns.elements.DottedLine;
 import ru.iimm.ontology.visualization.patterns.elements.SituationElementVis;
 
 /**
@@ -43,7 +46,12 @@ public class PElementVisBuilder implements PElementVisBuilderInt
 		PText label = new PText(entity.getLabelElement());
 		double width = label.getWidth() < 60 ? 60 : label.getWidth();
 		//Создаем каркас элемента.
-		PNode returnNode = PPath.createRectangle(0, 0, width, 50);
+		PPath returnNode = PPath.createRectangle(0, 0, width, 50);
+		if(this.entity.getDottedLine() == DottedLine.DASHED)
+		{
+			returnNode.setStroke(new PFixedWidthStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 10.0f,
+	                new float[] { 6.0f }, 1.0f));
+		}
 		returnNode.setPaint(entity.getBackgroudColor());
 		returnNode.addChild(label);
 		//ставил лейбл по-центру.
@@ -73,9 +81,15 @@ public class PElementVisBuilder implements PElementVisBuilderInt
 		int[] xpointsNew = {0,       0, 0+width,       0+width,0+width+edgeW,       0+width, 0+width,0,0};
     	int[] ypointsNew = {0,0-height,0-height,0-height-edgeH,            0,0+height+edgeH,0+height,0+height};
     	
-    	PNode arrow = new PPath.Double(new Polygon(xpointsNew, ypointsNew, 8));
+    	PPath arrow = new PPath.Double(new Polygon(xpointsNew, ypointsNew, 8));
     	arrow.setPaint(this.arrow.getBackgroudColor());
 
+    	if(this.arrow.getDottedLine() == DottedLine.DASHED)
+    	{
+    		arrow.setStroke(new PFixedWidthStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 10.0f,
+                    new float[] { 6.0f }, 1.0f));
+    	}
+    	
 		return arrow;
 	}
 
@@ -119,7 +133,12 @@ public class PElementVisBuilder implements PElementVisBuilderInt
 		PText label = new PText(this.concept.getLabelElement());
 		double width = label.getWidth() < 60 ? 60 : label.getWidth();
 		//Создаем каркас элемента.
-		PNode returnNode = PPath.createRectangle(0, 0, width, 50);
+		PPath returnNode = PPath.createRectangle(0, 0, width, 50);
+		if(this.concept.getDottedLine() == DottedLine.DASHED)
+		{
+			returnNode.setStroke(new PFixedWidthStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 10.0f,
+	                new float[] { 6.0f }, 1.0f));
+		}
 		returnNode.setPaint(concept.getBackgroudColor());
 		returnNode.addChild(label);
 		//ставил лейбл по-центру.

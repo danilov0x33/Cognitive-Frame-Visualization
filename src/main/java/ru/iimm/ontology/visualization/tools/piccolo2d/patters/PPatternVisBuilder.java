@@ -1,17 +1,20 @@
 package ru.iimm.ontology.visualization.tools.piccolo2d.patters;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import org.piccolo2d.PNode;
 import org.piccolo2d.extras.swing.SwingLayoutNode;
 import org.piccolo2d.extras.swing.SwingLayoutNode.Anchor;
+import org.piccolo2d.extras.util.PFixedWidthStroke;
 import org.piccolo2d.nodes.PPath;
 import org.piccolo2d.nodes.PText;
 
 import ru.iimm.ontology.visualization.patterns.DescriptionRealizationVis;
 import ru.iimm.ontology.visualization.patterns.SituationRealizationVis;
 import ru.iimm.ontology.visualization.patterns.elements.DescriptionElementVis;
+import ru.iimm.ontology.visualization.patterns.elements.DottedLine;
 import ru.iimm.ontology.visualization.patterns.elements.SituationElementVis;
 
 /**
@@ -45,7 +48,12 @@ public class PPatternVisBuilder implements PPatternVisBuilderInt
 		//Рисуем лейб с именем ситуации
 		PText label = new PText(situationRealVis.getLabelElement());
 		//создаем визуальных каркас (рамку) для ситуации
-		PNode node = PPath.createRectangle(0, 0, label.getWidth()+10, 50);
+		PPath node = PPath.createRectangle(0, 0, label.getWidth()+10, 50);
+		if(situationRealVis.getDottedLine() == DottedLine.DASHED)
+		{
+			node.setStroke(new PFixedWidthStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 10.0f,
+	                new float[] { 6.0f }, 1.0f));
+		}
 		node.setPaint(situationRealVis.getBackgroudColor());
 		//добовляем лейб в рамку
 		node.addChild(label);
@@ -93,7 +101,12 @@ public class PPatternVisBuilder implements PPatternVisBuilderInt
 		//Рисуем лейб с именем ситуации
 		PText label = new PText(descriptionRealVis.getLabelElement());
 		//создаем визуальных каркас (рамку) для описания
-		PNode node = PPath.createRectangle(0, 0, label.getWidth()+10, 50);
+		PPath node = PPath.createRectangle(0, 0, label.getWidth()+10, 50);
+		if(descriptionRealVis.getDottedLine() == DottedLine.DASHED)
+		{
+			node.setStroke(new PFixedWidthStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 10.0f,
+	                new float[] { 6.0f }, 1.0f));
+		}
 		node.setPaint(descriptionRealVis.getBackgroudColor());
 		//добовляем лейб в рамку
 		node.addChild(label);
