@@ -92,14 +92,14 @@ public class PPatternVisBuilder implements PPatternVisBuilderInt
 		
 		//Рисуем лейб с именем ситуации
 		PText label = new PText(descriptionRealVis.getLabelElement());
-		//создаем визуальных каркас (рамку) для ситуации
+		//создаем визуальных каркас (рамку) для описания
 		PNode node = PPath.createRectangle(0, 0, label.getWidth()+10, 50);
 		node.setPaint(descriptionRealVis.getBackgroudColor());
 		//добовляем лейб в рамку
 		node.addChild(label);
-		//Расстояние между элементами ситуации
+		//Расстояние между концептами описания
 		double hGrap = 0; 
-		//Элемент не имеющий визуальных образу,
+		//Элемент не имеющий визуальный образ,
 		//но способный расставить элементы учитывая используемый менеджер компоновки
 		SwingLayoutNode flowLayoutNode = new SwingLayoutNode(new FlowLayout(FlowLayout.LEFT,(int) hGrap,0));
 		//Билдер для создания визуальных элементов паттерна

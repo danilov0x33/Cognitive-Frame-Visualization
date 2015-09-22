@@ -5,7 +5,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import ru.iimm.ontology.visualization.patterns.ElementVis;
 
 /**
- *
+ * Визуальный образ для концептов паттерна описание.
  * @author Danilov
  * @version 0.1
  */

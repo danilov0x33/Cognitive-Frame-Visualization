@@ -9,7 +9,7 @@ import ru.iimm.ontology.visualization.patterns.elements.ArrowElementVis;
 import ru.iimm.ontology.visualization.patterns.elements.DescriptionElementVis;
 
 /**
- *Реализация для визуального образа: {@linkplain DescriptionRealization}.
+ * Реализация для визуального образа: {@linkplain DescriptionRealization}.
  * @author Danilov
  * @version 0.1
  */
