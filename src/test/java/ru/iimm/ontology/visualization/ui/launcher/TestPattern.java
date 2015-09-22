@@ -11,7 +11,9 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import ru.iimm.ontology.ontAPI.Ontology;
+import ru.iimm.ontology.pattern.DescriptionCDP;
 import ru.iimm.ontology.pattern.SituationCDP;
+import ru.iimm.ontology.pattern.realizations.DescriptionRealization;
 import ru.iimm.ontology.pattern.realizations.SituationRealization;
 import ru.iimm.ontology.visualization.ui.mvp.impl.presenters.PresenterPatternVisPiccolo2DVisitorImpl;
 
@@ -58,12 +60,14 @@ public class TestPattern extends JFrame
 		OWLNamedIndividual ind =  ontTerms.df.getOWLNamedIndividual(IRI.create("http://danilov.ru/danilov.owl#testIndivid"));
 
 		SituationCDP situation = new SituationCDP(patternOntDirPath);
-
-		SituationRealization.Builder builder = SituationRealization.newBuilder(situation);
+		SituationRealization.Builder builderSit = SituationRealization.newBuilder(situation);
+		
+		DescriptionCDP description = new DescriptionCDP(patternOntDirPath);
+		DescriptionRealization.Builder builderDe = DescriptionRealization.newBuilder(description);
 		
 		PresenterPatternVisPiccolo2DVisitorImpl pPresenter = new PresenterPatternVisPiccolo2DVisitorImpl();
-		
-		pPresenter.visit(builder.setEntity(object,rl2,object,rl2).setSituation(rl).buildVisualization());
+		pPresenter.visit(builderSit.setEntity(object,rl2,object,rl2).setSituation(rl).buildVisualization());
+		pPresenter.visit(builderDe.setConcepts(object,rl2,object,rl2).setDescription(rl).buildVisualization());
 		pPresenter.getView().open();
 		this.getContentPane().add(pPresenter.getView().getViewComponent());
     }

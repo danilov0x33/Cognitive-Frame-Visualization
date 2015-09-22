@@ -8,4 +8,5 @@ package ru.iimm.ontology.visualization.patterns;
 public interface PatternVisVisitorInt
 {
 	void visit(SituationRealizationVis realization);
+	void visit(DescriptionRealizationVis realization);
 }

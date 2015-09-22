@@ -13,6 +13,12 @@ public abstract class ElementVis
 	/**Цвет.*/
 	protected Color backgroudColor;
 
+	public ElementVis()
+	{
+		this.labelElement = "unknow_elem";
+		this.backgroudColor = Color.WHITE;
+	}
+	
 	/**
 	 * @return the {@linkplain #backgroudColor}
 	 */

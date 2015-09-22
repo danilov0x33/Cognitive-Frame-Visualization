@@ -1,5 +1,7 @@
 package ru.iimm.ontology.pattern.realizations;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 import org.semanticweb.owlapi.model.OWLClass;
@@ -9,25 +11,31 @@ import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
 
 import ru.iimm.ontology.pattern.DescriptionCDP;
 import ru.iimm.ontology.pattern.ODPRealization;
+import ru.iimm.ontology.visualization.patterns.DescriptionRealizationVis;
+import ru.iimm.ontology.visualization.patterns.elements.ArrowElementVis;
+import ru.iimm.ontology.visualization.patterns.elements.DescriptionElementVis;
 
 public class DescriptionRealization extends ODPRealization
 {
 	private OWLClass description;
-	private OWLClass concept;
+	private ArrayList<OWLClass> concepts;
 	
 	/**
 	 * {@linkplain DescriptionRealization}
 	 */
-	private DescriptionRealization(){}
+	private DescriptionRealization()
+	{
+		this.concepts = new ArrayList<OWLClass>();
+	}
 
 	public OWLClass getDescription()
 	{
 		return description;
 	}
 
-	public OWLClass getConcept()
+	public ArrayList<OWLClass> getConcept()
 	{
-		return concept;
+		return this.concepts;
 	}	
 	
 	public static Builder newBuilder(DescriptionCDP pattern)
@@ -46,39 +54,77 @@ public class DescriptionRealization extends ODPRealization
 		
 		public Builder setConcept(OWLClass concept)
 		{
-			DescriptionRealization.this.concept = concept;
+			DescriptionRealization.this.concepts.add(concept);
 			return this;
 		}
-
+		public Builder setConcepts(OWLClass ... concepts)
+		{
+			for(OWLClass concept : concepts)
+			{
+				DescriptionRealization.this.concepts.add(concept);
+			}
+			return this;
+		}
+		public Builder setConcepts(Collection<OWLClass> concepts)
+		{
+			for(OWLClass concept : concepts)
+			{
+				DescriptionRealization.this.concepts.add(concept);
+			}
+			return this;
+		}
 		public Builder setDescription(OWLClass description)
 		{
 			DescriptionRealization.this.description = description;
 			return this;
 		}
 		
+		public DescriptionRealizationVis buildVisualization()
+		{
+			DescriptionRealization description = this.build();
+			
+			DescriptionRealizationVis desVis = new DescriptionRealizationVis(description.getDescription());
+			desVis.setLabelElement(description.getDescription().getIRI().getFragment());
+			desVis.setBinder(new ArrowElementVis(this.pattern.getDefines()));
+			
+			for(OWLClass concept : description.getConcept())
+			{
+				DescriptionElementVis visElem = new DescriptionElementVis(concept);
+				visElem.setLabelElement(concept.getIRI().getFragment());
+				
+				desVis.addElement(visElem);
+			}
+			
+			return desVis;
+		}
+		
 		public DescriptionRealization build()
 		{	
 			//Создаем новый объект
 			DescriptionRealization realization = new DescriptionRealization();			
-			realization.concept = DescriptionRealization.this.concept;
+			realization.concepts = DescriptionRealization.this.concepts;
 			realization.description = DescriptionRealization.this.description;
 			realization.setPattern(this.pattern);
 			
 			OWLDataFactory df = pattern.getOWLDataFactory();
 			
 			//Заполняем аксиомами
-			Set<OWLLogicalAxiom> structuralAxList = realization.getStructualAxiomSet();
-			structuralAxList.add(df.getOWLSubClassOfAxiom(concept, pattern.getConcept()));
+			Set<OWLLogicalAxiom> structuralAxList = realization.getStructualAxiomSet();	
 			structuralAxList.add(df.getOWLSubClassOfAxiom(description, pattern.getDescription()));
 			
-			OWLObjectSomeValuesFrom defines = df.getOWLObjectSomeValuesFrom(pattern.getDefines(), concept);
-			OWLObjectSomeValuesFrom isDefinesIn = df.getOWLObjectSomeValuesFrom(pattern.getIsDefinesIn(), description);
-			OWLObjectSomeValuesFrom usesConcept = df.getOWLObjectSomeValuesFrom(pattern.getUsesConcept(), concept);
-			OWLObjectSomeValuesFrom isConceptUsedIn = df.getOWLObjectSomeValuesFrom(pattern.getIsConceptUsedIn(), description);
-			structuralAxList.add(df.getOWLSubClassOfAxiom(concept, defines));
-			structuralAxList.add(df.getOWLSubClassOfAxiom(description, isDefinesIn));
-			structuralAxList.add(df.getOWLSubClassOfAxiom(concept, usesConcept));
-			structuralAxList.add(df.getOWLSubClassOfAxiom(description, isConceptUsedIn));
+			for(OWLClass concept : concepts)
+			{
+				structuralAxList.add(df.getOWLSubClassOfAxiom(concept, pattern.getConcept()));
+				
+				OWLObjectSomeValuesFrom defines = df.getOWLObjectSomeValuesFrom(pattern.getDefines(), concept);
+				OWLObjectSomeValuesFrom isDefinesIn = df.getOWLObjectSomeValuesFrom(pattern.getIsDefinesIn(), description);
+				OWLObjectSomeValuesFrom usesConcept = df.getOWLObjectSomeValuesFrom(pattern.getUsesConcept(), concept);
+				OWLObjectSomeValuesFrom isConceptUsedIn = df.getOWLObjectSomeValuesFrom(pattern.getIsConceptUsedIn(), description);
+				structuralAxList.add(df.getOWLSubClassOfAxiom(description, defines));
+				structuralAxList.add(df.getOWLSubClassOfAxiom(concept, isDefinesIn));
+				structuralAxList.add(df.getOWLSubClassOfAxiom(description, usesConcept));
+				structuralAxList.add(df.getOWLSubClassOfAxiom(concept, isConceptUsedIn));
+			}
 
 			return realization;
 		}
