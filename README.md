@@ -1,5 +1,5 @@
 # Cognitive Frame Visualizer
-Cognitive Frame Visualizer - tool for making OWL Ontologies visualization based on the Cognitive Frames [RU](https://github.com/danilovEY/Cognitive-Frame-Visualization.git), [EN](https://books.google.ru/books?id=KstsBAAAQBAJ&lpg=PA103&ots=eqLnuC1QLt&dq=Cognitive%20Frames%20Formation%20Based%20on%20Ontology%20Design%20Patterns%20for%20Ontology%20Visualization&hl=ru&pg=PA90#v=onepage&q=Cognitive%20Frames%20Formation%20Based%20on%20Ontology%20Design%20Patterns%20for%20Ontology%20Visualization&f=false).
+Cognitive Frame Visualizer - tool for making OWL Ontologies visualization based on the Cognitive Frames ( [RU](http://cyberleninka.ru/article/n/vizualizatsiya-na-osnove-kognitivnyh-freymov-dlya-peredachi-znaniy), [EN](https://books.google.ru/books?id=KstsBAAAQBAJ&lpg=PA103&ots=eqLnuC1QLt&dq=Cognitive%20Frames%20Formation%20Based%20on%20Ontology%20Design%20Patterns%20for%20Ontology%20Visualization&hl=ru&pg=PA90#v=onepage&q=Cognitive%20Frames%20Formation%20Based%20on%20Ontology%20Design%20Patterns%20for%20Ontology%20Visualization&f=false)).
 
 #### Prerequisites
 
