@@ -14,7 +14,7 @@ To build and run the visualizer, you must have the following items installed:
 
 1. Get a copy code:
 
-        git clone https://bitbucket.org/crider/ontvis.git CognitiveFrameVisualizer
+        git clone https://github.com/danilovEY/Cognitive-Frame-Visualization.git CognitiveFrameVisualizer
     
 2. Change into the CognitiveFrameVisualizer directory.
 
